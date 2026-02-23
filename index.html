@@ -3,7 +3,7 @@
  <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Healthcare Emissions Action Lab</title>
+  <title>Healthcare Emissions Action Lab v127</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&amp;display=swap" rel="stylesheet">
@@ -39,8 +39,7 @@
   <style>body { box-sizing: border-box; }</style>
  </head>
  <body class="bg-gradient-to-br from-emerald-900 via-slate-900 to-emerald-950 text-white">
-  <div id="app">
-   <!-- Welcome Screen -->
+  <div id="app"><!-- Welcome Screen -->
    <div id="welcome-screen" class="w-full h-full flex flex-col items-center justify-center p-6 bg-gradient-to-br from-emerald-900 via-slate-900 to-emerald-950">
     <div class="text-center max-w-2xl animate-in">
      <div class="text-8xl mb-6">
@@ -50,32 +49,28 @@
      <p class="text-2xl text-emerald-300/80 mb-2"><span id="welcome-subtitle">Alexandra Hospital</span></p>
      <p class="text-emerald-400/60 mb-8 text-lg">Net Zero by 2045</p>
      <div class="bg-slate-800/40 rounded-2xl p-8 mb-8 border border-emerald-700/30 space-y-4">
-      <div class="flex items-center gap-4 text-left">
-       <span class="text-4xl">📊</span>
+      <div class="flex items-center gap-4 text-left"><span class="text-4xl">📊</span>
        <div>
         <p class="font-semibold text-emerald-300">7-Year Challenge</p>
         <p class="text-slate-400 text-sm">Make 3 strategic decisions each year</p>
        </div>
       </div>
-      <div class="flex items-center gap-4 text-left">
-       <span class="text-4xl">🎯</span>
+      <div class="flex items-center gap-4 text-left"><span class="text-4xl">🎯</span>
        <div>
-        <p class="font-semibold text-emerald-300">40% Reduction Target</p>
-        <p class="text-slate-400 text-sm">From 30,000 to ≤18,000 tonnes CO₂e</p>
+        <p class="font-semibold text-emerald-300">50% Reduction Target</p>
+        <p class="text-slate-400 text-sm">From 30,000 to ≤15,000 tonnes CO₂e</p>
        </div>
       </div>
-      <div class="flex items-center gap-4 text-left">
-       <span class="text-4xl">⚡</span>
+      <div class="flex items-center gap-4 text-left"><span class="text-4xl">⚡</span>
        <div>
         <p class="font-semibold text-emerald-300">Balance 6 Key Metrics</p>
         <p class="text-slate-400 text-sm">Navigate cost, emissions, energy, satisfaction, engagement, rating</p>
        </div>
       </div>
-     </div><button onclick="startGame()" class="px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 rounded-xl font-bold text-white shadow-lg shadow-emerald-500/25 transition-all text-lg"> Begin Challenge → Year 1 </button>
+     </div><button onclick="startGame()" class="px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 rounded-xl font-bold text-white shadow-lg shadow-emerald-500/25 transition-all text-lg">Begin Challenge → Year 1</button>
     </div>
    </div><!-- Game Screen -->
-   <div id="game-screen" class="hidden w-full h-full flex flex-col">
-    <!-- Header -->
+   <div id="game-screen" class="hidden w-full h-full flex flex-col"><!-- Header -->
     <header class="bg-slate-900/80 backdrop-blur border-b border-emerald-700/30 p-6 flex-shrink-0">
      <div class="max-w-7xl mx-auto">
       <div class="flex items-center justify-between mb-4">
@@ -89,8 +84,7 @@
        </div>
       </div><!-- Carbon Reduction Bar -->
       <div class="space-y-2">
-       <div class="flex justify-between items-center text-sm">
-        <span class="text-slate-400">Carbon Reduction Progress</span> <span class="font-semibold text-emerald-400"><span id="carbon-percent">0</span>% → Goal: 40%</span>
+       <div class="flex justify-between items-center text-sm"><span class="text-slate-400">Carbon Reduction Progress</span> <span class="font-semibold text-emerald-400"><span id="carbon-percent">0</span>% → Goal: 50%</span>
        </div>
        <div class="carbon-bar">
         <div id="carbon-progress-bar" class="carbon-progress" style="width: 0%"></div>
@@ -127,10 +121,8 @@
      </div>
     </div><!-- Game Content -->
     <div id="game-content" class="flex-1 overflow-y-auto p-6">
-     <div class="max-w-7xl mx-auto">
-      <!-- Decision Phase -->
-      <div id="decision-phase">
-       <!-- Initiative Selection -->
+     <div class="max-w-7xl mx-auto"><!-- Decision Phase -->
+      <div id="decision-phase"><!-- Initiative Selection -->
        <div class="mb-8">
         <div class="flex items-center justify-between mb-6">
          <div>
@@ -166,25 +158,20 @@
         <p class="text-slate-400 mb-4">Invest in staff training for climate change awareness (2,000 employees)</p>
         <div class="space-y-4">
          <div>
-          <div class="flex justify-between mb-2">
-           <span class="text-slate-300">Budget: <span id="budget-display" class="font-bold text-emerald-400">$0</span></span> <span class="text-sm text-slate-400">Per employee: <span id="per-employee" class="font-bold">$0</span></span>
+          <div class="flex justify-between mb-2"><span class="text-slate-300">Budget: <span id="budget-display" class="font-bold text-emerald-400">$0</span></span> <span class="text-sm text-slate-400">Per employee: <span id="per-employee" class="font-bold">$0</span></span>
           </div><input type="range" id="training-slider" min="0" max="500000" step="25000" value="0" class="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer" oninput="updateTrainingBudget()">
          </div><!-- Quick Buttons -->
-         <div class="grid grid-cols-5 gap-2">
-          <button onclick="setTrainingBudget(0)" class="px-3 py-2 bg-slate-700 hover:bg-slate-600 rounded-lg text-sm font-medium transition">$0</button> <button onclick="setTrainingBudget(125000)" class="px-3 py-2 bg-slate-700 hover:bg-slate-600 rounded-lg text-sm font-medium transition">$125K</button> <button onclick="setTrainingBudget(250000)" class="px-3 py-2 bg-slate-700 hover:bg-slate-600 rounded-lg text-sm font-medium transition">$250K</button> <button onclick="setTrainingBudget(375000)" class="px-3 py-2 bg-slate-700 hover:bg-slate-600 rounded-lg text-sm font-medium transition">$375K</button> <button onclick="setTrainingBudget(500000)" class="px-3 py-2 bg-slate-700 hover:bg-slate-600 rounded-lg text-sm font-medium transition">$500K</button>
+         <div class="grid grid-cols-5 gap-2"><button onclick="setTrainingBudget(0)" class="px-3 py-2 bg-slate-700 hover:bg-slate-600 rounded-lg text-sm font-medium transition">$0</button> <button onclick="setTrainingBudget(125000)" class="px-3 py-2 bg-slate-700 hover:bg-slate-600 rounded-lg text-sm font-medium transition">$125K</button> <button onclick="setTrainingBudget(250000)" class="px-3 py-2 bg-slate-700 hover:bg-slate-600 rounded-lg text-sm font-medium transition">$250K</button> <button onclick="setTrainingBudget(375000)" class="px-3 py-2 bg-slate-700 hover:bg-slate-600 rounded-lg text-sm font-medium transition">$375K</button> <button onclick="setTrainingBudget(500000)" class="px-3 py-2 bg-slate-700 hover:bg-slate-600 rounded-lg text-sm font-medium transition">$500K</button>
          </div>
         </div>
        </div><!-- Confirm Button -->
-       <div class="text-center mb-8">
-        <button onclick="confirmYear()" class="px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 rounded-xl font-bold text-white shadow-lg shadow-emerald-500/25 transition-all text-lg"> Complete Year &amp; See Results → </button>
+       <div class="text-center mb-8"><button onclick="confirmYear()" class="px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 rounded-xl font-bold text-white shadow-lg shadow-emerald-500/25 transition-all text-lg">Complete Year &amp; See Results →</button>
        </div>
       </div><!-- Results Phase -->
-      <div id="results-phase" class="hidden pb-8">
-       <!-- Year Summary -->
+      <div id="results-phase" class="hidden pb-8"><!-- Year Summary -->
        <div class="mb-8">
-        <h2 class="text-3xl font-bold text-emerald-400 mb-6">📊 Year <span id="result-year">1</span> Results</h2><!-- Training Feedback (Results Only) -->
-        <div id="year-training-feedback" class="bg-blue-900/30 border border-blue-700/50 rounded-2xl p-6 mb-6 text-sm"></div><!-- Initiative Feedback (3 items) -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6" id="initiative-feedback-container"></div><!-- Events -->
+        <h2 class="text-3xl font-bold text-emerald-400 mb-6">📊 Year <span id="result-year">1</span> Results</h2><!-- Training Feedback + Initiative Feedback Combined -->
+        <div id="feedback-section" class="mb-6"></div><!-- Events -->
         <div id="events-container" class="mb-6"></div>
        </div><!-- Charts -->
        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
@@ -227,8 +214,7 @@
          </div>
         </div>
        </div><!-- Action Buttons -->
-       <div class="text-center" id="action-buttons">
-        <button onclick="nextYear()" class="px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 rounded-xl font-bold text-white shadow-lg shadow-emerald-500/25 transition-all text-lg"> Continue to Year <span id="next-year-num">2</span> → </button>
+       <div class="text-center" id="action-buttons"><button onclick="nextYear()" class="px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 rounded-xl font-bold text-white shadow-lg shadow-emerald-500/25 transition-all text-lg">Continue to Year <span id="next-year-num">2</span> →</button>
        </div>
       </div>
      </div>
@@ -238,7 +224,8 @@
   <script>
     const TOTAL_YEARS = 7;
     const STARTING_METRICS = { cost: 100000000, carbon: 30000, electricity: 40000000, patient: 80, employee: 80, rating: 3 };
-    const TARGET_CARBON = 18000;
+    const TARGET_CARBON = 15000;
+    const TELEMEDICINE_IDS = ['y1-telemedicine', 'y2-telemedicine-expand', 'y3-remote-mental', 'y4-telemedicine-research', 'y5-telemedicine-rehab', 'y6-telemedicine-ed', 'y7-telemedicine-integrated'];
 
     let gameState = {
       currentYear: 0,
@@ -249,17 +236,19 @@
       allInitiatives: {},
       carryoverInitiatives: [],
       triggeredEvents: [],
-      allSelectedOverGame: []
+      allSelectedOverGame: [],
+      eventImpacts: {},
+      telemedicineSelected: false
     };
 
     let charts = {};
     let currentConfig = { game_title: 'Healthcare Emissions Action Lab', welcome_title: 'Healthcare Emissions Action Lab', welcome_subtitle: 'Alexandra Hospital' };
 
-    // === INITIATIVES DATABASE WITH DESCRIPTIONS ===
     const initiativesDatabase = {
       'year-1': [
         { id: 'y1-cso', name: 'Chief Sustainability Officer', icon: '👔', category: 'leadership', description: 'Hire a dedicated Chief Sustainability Officer to lead sustainability initiatives and coordinate hospital-wide efforts.', effects: { cost: 102000, carbon: -2500, electricity: -515000, patient: 0, employee: 2, rating: 0 }, feedback: 'The CSO quickly began having an impact through structured sustainability efforts, increased staff engagement, and greater effectiveness of training programs.' },
         { id: 'y1-board', name: 'Board Involvement', icon: '📋', category: 'leadership', description: 'Engage board members as sustainability champions to strengthen organizational commitment and accountability.', effects: { cost: 0, carbon: -1500, electricity: 0, patient: 0, employee: 1, rating: 1 }, feedback: 'Senior-level Board commitment is increasing staff engagement and strengthening the hospital\'s sustainability reputation.' },
+        { id: 'y1-telemedicine', name: 'Remote Consultations Program', icon: '💻', category: 'clinical', description: 'Launch initial telemedicine platform enabling patients to receive consultations remotely, reducing travel-related emissions and expanding healthcare access.', effects: { cost: 150000, carbon: -450, electricity: 120000, patient: 2, employee: 1, rating: 1 }, feedback: 'Telemedicine enables 15% of consultations remotely, significantly reducing patient travel emissions while improving healthcare accessibility.' },
         { id: 'y1-inhalers', name: 'Low Emission Inhalers', icon: '💨', category: 'clinical', description: 'Transition to low-emission inhaler technology that reduces propellant emissions by 50% with equivalent patient outcomes.', effects: { cost: 0, carbon: -160, electricity: 0, patient: 0, employee: 0, rating: 0 }, feedback: 'New low-emission inhalers reduce emissions by 50% with no negative impact on patient or staff care.' },
         { id: 'y1-prescription', name: 'Low Carbon Prescription Practices', icon: '💊', category: 'clinical', description: 'Implement evidence-based prescription protocols to reduce unnecessary medications and associated supply chain emissions.', effects: { cost: -1535000, carbon: -820, electricity: 0, patient: 0, employee: 0, rating: 0 }, feedback: 'New prescription practices reduce prescriptions and medication costs with no clinical quality impact.' },
         { id: 'y1-renewable', name: 'On-Site Renewable Energy', icon: '☀️', category: 'operations', description: 'Install solar panels and renewable generation systems to reduce grid electricity dependency and long-term energy costs.', effects: { cost: -10000, carbon: 0, electricity: -110000, patient: 0, employee: 0, rating: 0 }, feedback: 'Solar panels have been installed. Grid electricity consumption decreased. Embodied carbon impact will diminish in future years.' },
@@ -273,6 +262,7 @@
       'year-2': [
         { id: 'y2-financing', name: 'Green Financing Mechanism', icon: '💚', category: 'leadership', description: 'Create a dedicated green financing fund to accelerate sustainable infrastructure investments and improvements.', effects: { cost: 0, carbon: 0, electricity: 0, patient: 0, employee: 3, rating: 1 }, feedback: 'Green financing improves employee awareness and engagement, setting the stage for future projects.' },
         { id: 'y2-climate-plan', name: 'Planning for Disruptive Climate Events', icon: '🌊', category: 'leadership', description: 'Develop comprehensive disaster preparedness plans addressing flooding, extreme heat, and supply chain disruptions.', effects: { cost: 100000, carbon: 0, electricity: 0, patient: 0, employee: 0, rating: 1 }, feedback: 'Climate preparedness measures complete. Hospital resilience against flooding and extreme weather increased.' },
+        { id: 'y2-telemedicine-expand', name: 'Expand Telemedicine Network', icon: '📱', category: 'clinical', description: 'Expand telemedicine capabilities to include specialist consultations and follow-up care, enabling up to 30% of clinical interactions remotely.', effects: { cost: 200000, carbon: -850, electricity: 180000, patient: 3, employee: 2, rating: 2 }, feedback: 'Expanded telemedicine now covers 30% of patient interactions. Specialist consultations drive additional patient satisfaction and emissions reduction.' },
         { id: 'y2-attire', name: 'Reusable Clinical Attire', icon: '👔', category: 'clinical', description: 'Switch from single-use clinical clothing to durable, reusable uniforms managed through hospital laundry services.', effects: { cost: 0, carbon: -230, electricity: 0, patient: 0, employee: 1, rating: 0 }, feedback: 'Emissions from waste and purchasing have gone down. Cost impact is neutral with longer-lasting items.' },
         { id: 'y2-anesthetic', name: 'Low Emission Anesthetic Practices', icon: '💉', category: 'clinical', description: 'Reduce emissions from anesthetic gases by minimizing volatile anesthetic use and optimizing delivery methods.', effects: { cost: 0, carbon: -360, electricity: 0, patient: 0, employee: 0, rating: 0 }, feedback: 'Switching from desflurane and reducing flow rates achieves 30% emissions reduction per intervention safely.' },
         { id: 'y2-haze', name: 'Carbon Filters & Haze Fans', icon: '🌫️', category: 'operations', description: 'Install air filtration systems and outdoor air quality monitoring to protect patients and staff during haze events.', effects: { cost: 50000, carbon: 0, electricity: 0, patient: 2, employee: 1, rating: 1 }, feedback: 'Air quality improvements during haze episodes are significantly benefiting patient and staff health.' },
@@ -284,6 +274,7 @@
       'year-3': [
         { id: 'y3-commitment', name: 'Public Commitment', icon: '📢', category: 'leadership', description: 'Make formal public commitments to Net Zero targets, improving transparency and accountability to stakeholders.', effects: { cost: -350000, carbon: -630, electricity: -1500000, patient: 1, employee: 2, rating: 2 }, feedback: 'Public commitment to emissions reduction has improved hospital ratings and increased Board and staff engagement.' },
         { id: 'y3-behavior', name: 'Behavior-Change Programme', icon: '🎯', category: 'leadership', description: 'Launch employee engagement campaigns to reduce energy use through behavioral changes (turning off lights, adjusting thermostats).', effects: { cost: -530000, carbon: -830, electricity: -2370000, patient: 2, employee: 3, rating: 1 }, feedback: 'TLC-inspired behavior changes reduce lighting and HVAC consumption significantly while improving patient sleep quality.' },
+        { id: 'y3-remote-mental', name: 'Mental Health Telemedicine Services', icon: '🧠', category: 'clinical', description: 'Launch dedicated telemedicine platform for mental health and psychological support, eliminating unnecessary patient travel for therapy sessions.', effects: { cost: 100000, carbon: -300, electricity: 80000, patient: 4, employee: 1, rating: 1 }, feedback: 'Mental health telemedicine reduces patient travel emissions while improving accessibility to mental health services.' },
         { id: 'y3-inpatient', name: 'Reduce Avoidable Inpatient Days', icon: '🛏️', category: 'clinical', description: 'Improve discharge protocols and community partnerships to safely reduce unnecessary overnight hospital stays.', effects: { cost: 0, carbon: -210, electricity: 0, patient: 1, employee: 1, rating: 1 }, feedback: 'Reducing unnecessary overnight stays improves efficiency and reduces carbon intensity per patient admission.' },
         { id: 'y3-diagnostics', name: 'Reduce Unnecessary Diagnostic Tests', icon: '🔬', category: 'clinical', description: 'Update clinical protocols to eliminate redundant diagnostic tests while maintaining diagnostic accuracy and outcomes.', effects: { cost: -75000, carbon: -100, electricity: 0, patient: 0, employee: 1, rating: 0 }, feedback: 'Updated clinical protocols for essential tests save costs, reduce waste, with no clinical quality impact.' },
         { id: 'y3-lights', name: 'Install Light Sensors', icon: '🔆', category: 'operations', description: 'Deploy motion sensors and occupancy-based lighting controls to automatically manage lighting in corridors and common areas.', effects: { cost: -50000, carbon: -100, electricity: -350000, patient: 0, employee: 1, rating: 0 }, feedback: 'Lighting sensors reduce energy in corridors by 60% with no negative staff or patient impact.' },
@@ -292,19 +283,23 @@
       ],
       'year-4': [
         { id: 'y4-travel', name: 'Green Travel Plan', icon: '🚴', category: 'leadership', description: 'Develop incentive programs for sustainable commuting including bike infrastructure, public transit subsidies, and carpooling.', effects: { cost: 9300, carbon: -650, electricity: 0, patient: 0, employee: 2, rating: 1 }, feedback: 'Improved bike lanes and transit incentives encourage sustainable commuting, reducing travel emissions by up to 20%.' },
+        { id: 'y4-telemedicine-research', name: 'Telemedicine for Patient Monitoring', icon: '⌚', category: 'clinical', description: 'Implement remote monitoring systems for chronic disease patients, enabling continuous care from home and reducing hospital visits by 25%.', effects: { cost: 120000, carbon: -550, electricity: 100000, patient: 3, employee: 1, rating: 1 }, feedback: 'Remote monitoring systems keep patients engaged from home, reducing unnecessary hospital visits and travel emissions.' },
         { id: 'y4-waste', name: 'Hazardous Waste Segregation', icon: '⚠️', category: 'operations', description: 'Implement advanced waste segregation protocols to reduce hazardous waste volume and improve recycling rates.', effects: { cost: 23000, carbon: -180, electricity: 0, patient: 0, employee: 0, rating: 0 }, feedback: 'Better waste segregation reduces hazardous waste volume and disposal costs while increasing recycling.' },
         { id: 'y4-green-spaces', name: 'Optimize Green Spaces', icon: '🌳', category: 'operations', description: 'Expand hospital grounds with native vegetation and green roofs to improve air quality and staff wellbeing.', effects: { cost: 28000, carbon: 0, electricity: 0, patient: 3, employee: 3, rating: 1 }, feedback: 'Increased vegetation around hospital improves air quality and makes grounds more appealing.' },
         { id: 'y4-food-waste', name: 'Reduce Food Waste', icon: '🍎', category: 'supply', description: 'Implement flexible meal portions and food donation programs to minimize food waste and loss.', effects: { cost: -140000, carbon: -100, electricity: 0, patient: 0, employee: 1, rating: 0 }, feedback: 'Flexible portions and donation programs reduce food waste emissions by 20% while saving 5% on food costs.' }
       ],
       'year-5': [
         { id: 'y5-rating', name: 'Get Sustainability Rating (ISO & JCI)', icon: '🏆', category: 'leadership', description: 'Pursue ISO 14001 and JCI sustainability certifications to formalize and validate sustainability operations.', effects: { cost: 18600, carbon: 0, electricity: 0, patient: 1, employee: 2, rating: 2 }, feedback: 'Sustainability certification has promoted accountability and positioned hospital as environmental champion.' },
+        { id: 'y5-telemedicine-rehab', name: 'Virtual Rehabilitation Program', icon: '🏃', category: 'clinical', description: 'Launch virtual rehabilitation and physiotherapy services allowing post-operative patients to continue recovery at home with remote guidance.', effects: { cost: 80000, carbon: -400, electricity: 70000, patient: 3, employee: 1, rating: 1 }, feedback: 'Virtual rehabilitation enables faster recovery with fewer hospital visits, reducing patient travel emissions and improving outcomes.' },
         { id: 'y5-ac', name: 'Air Conditioning System Upgrade', icon: '❄️', category: 'operations', description: 'Replace outdated HVAC equipment with modern high-efficiency units using low-GWP refrigerants.', effects: { cost: -1260000, carbon: -2000, electricity: -500000, patient: 2, employee: 1, rating: 0 }, feedback: 'Modern energy-efficient AC units achieve 30% HVAC reduction with improved comfort.' },
         { id: 'y5-cleaning', name: 'Eco-Friendly Cleaning Materials', icon: '🧹', category: 'supply', description: 'Transition all cleaning products to biodegradable, eco-certified formulations safe for patients and environment.', effects: { cost: 52000, carbon: -50, electricity: 0, patient: 0, employee: 1, rating: 0 }, feedback: 'Eco-friendly products reduce water consumption and chemical pollution with minimal emissions impact.' }
       ],
       'year-6': [
+        { id: 'y6-telemedicine-ed', name: 'Telemedicine Emergency Triage', icon: '🚑', category: 'clinical', description: 'Implement emergency virtual triage system to assess patients remotely first, directing them to appropriate care levels and reducing unnecessary ED visits.', effects: { cost: 150000, carbon: -600, electricity: 110000, patient: 2, employee: 2, rating: 1 }, feedback: 'Virtual emergency triage reduces unnecessary ED visits by 20%, cutting patient travel emissions and improving ED efficiency.' },
         { id: 'y6-waste-reduction', name: 'Waste Reduction Programme', icon: '🗑️', category: 'supply', description: 'Establish bulk purchasing agreements and reduce packaging waste across all procurement categories.', effects: { cost: -2300, carbon: -238, electricity: 0, patient: 0, employee: 1, rating: 0 }, feedback: 'Bulk purchasing and reduced packaging lower waste emissions and generate cost savings.' }
       ],
       'year-7': [
+        { id: 'y7-telemedicine-integrated', name: 'Integrated Telemedicine Hub', icon: '🌐', category: 'clinical', description: 'Create comprehensive integrated telemedicine hub connecting all departments and patient populations for seamless remote care delivery.', effects: { cost: 0, carbon: -700, electricity: 150000, patient: 4, employee: 2, rating: 2 }, feedback: 'Integrated telemedicine hub successfully handles 40% of patient interactions remotely, maximizing emissions reduction while maintaining care quality.' },
         { id: 'y7-reusable', name: 'Reusable Product Initiative', icon: '🔁', category: 'supply', description: 'Expand reusable product programs across clinical gowns, linens, and containers, reducing waste and purchasing.', effects: { cost: -46500, carbon: -410, electricity: 0, patient: 1, employee: 1, rating: 0 }, feedback: 'Reusable gowns, linens, and containers reduce purchasing and waste emissions by 10% safely.' }
       ]
     };
@@ -321,7 +316,7 @@
           defaultConfig: { game_title: 'Healthcare Emissions Action Lab', welcome_title: 'Healthcare Emissions Action Lab', welcome_subtitle: 'Alexandra Hospital' },
           onConfigChange: (cfg) => { currentConfig = cfg; updateGameText(); },
           mapToCapabilities: () => ({ recolorables: [], borderables: [], fontEditable: undefined, fontSizeable: undefined }),
-          mapToEditPanelValues: (cfg) => new Map([['hospital_name', cfg.welcome_subtitle || 'Alexandra Hospital'], ['game_title', cfg.game_title || 'Healthcare Emissions Action Lab'], ['game_subtitle', cfg.welcome_subtitle || 'Alexandra Hospital']])
+          mapToEditPanelValues: (cfg) => new Map([['hospital_name', cfg.welcome_subtitle || 'Alexandra Hospital'], ['game_title', cfg.game_title || 'Healthcare Emissions Action Lab']])
         });
       }
     }
@@ -358,7 +353,14 @@
 
     function populateInitiatives(year) {
       const yearInitiatives = initiativesDatabase[`year-${year}`] || [];
-      const allYearInitiatives = [...yearInitiatives, ...gameState.carryoverInitiatives];
+      // Filter out telemedicine initiatives if one has already been selected
+      const filteredYearInitiatives = yearInitiatives.filter(init => {
+        if (TELEMEDICINE_IDS.includes(init.id) && gameState.telemedicineSelected) {
+          return false;
+        }
+        return true;
+      });
+      const allYearInitiatives = [...filteredYearInitiatives, ...gameState.carryoverInitiatives];
       gameState.allInitiatives[`year-${year}`] = allYearInitiatives;
       const containers = {
         leadership: document.getElementById('leadership-decisions'),
@@ -431,6 +433,10 @@
           gameState.metrics.rating += initiative.effects.rating;
           feedbacks.push({ name: initiative.name, feedback: initiative.feedback });
           gameState.allSelectedOverGame.push(id);
+          // Mark telemedicine as selected if this is a telemedicine initiative
+          if (TELEMEDICINE_IDS.includes(id)) {
+            gameState.telemedicineSelected = true;
+          }
         }
       });
       gameState.metrics.carbon = Math.max(0, gameState.metrics.carbon);
@@ -462,16 +468,24 @@
 
     function checkEvents(year) {
       gameState.triggeredEvents = [];
+      gameState.eventImpacts = {};
+      
       if (year === 3 && gameState.metrics.electricity > 35000000) {
-        gameState.metrics.cost += 465000;
+        const energyCost = 465000;
+        gameState.metrics.cost += energyCost;
+        gameState.eventImpacts.energy = energyCost;
         gameState.triggeredEvents.push('energy-crisis');
       }
+      
       if (year === 4 && !gameState.allSelectedOverGame.includes('y2-climate-plan')) {
-        gameState.metrics.cost += 2000000;
+        const floodCost = 2000000;
+        gameState.metrics.cost += floodCost;
         gameState.metrics.patient -= 20;
         gameState.metrics.employee -= 20;
+        gameState.eventImpacts.flood = floodCost;
         gameState.triggeredEvents.push('flood');
       }
+      
       if (year === 6) {
         if (!gameState.allSelectedOverGame.includes('y2-haze')) {
           gameState.metrics.rating -= 1;
@@ -480,6 +494,7 @@
           gameState.triggeredEvents.push('haze');
         }
       }
+      
       gameState.metrics.patient = Math.max(0, Math.min(100, gameState.metrics.patient));
       gameState.metrics.employee = Math.max(0, Math.min(100, gameState.metrics.employee));
       gameState.metrics.rating = Math.max(0, gameState.metrics.rating);
@@ -490,64 +505,68 @@
       document.getElementById('results-phase').classList.remove('hidden');
       document.getElementById('result-year').textContent = gameState.currentYear;
       
-      // Training feedback (ONLY on results page)
-      const trainingFeedbackDiv = document.getElementById('year-training-feedback');
+      const feedbackSection = document.getElementById('feedback-section');
+      feedbackSection.innerHTML = '';
+
+      const trainingDiv = document.createElement('div');
       let trainingMsg = '';
       if (gameState.trainingBudget === 0) {
         trainingMsg = '⚠️ <strong>No Staff Training:</strong> Without training, your employees lack knowledge to drive sustainability forward.';
       } else if (gameState.trainingBudget <= 250000) {
         trainingMsg = '✓ <strong>Staff Training Invested:</strong> Your team has gained skills and motivation to support initiatives.';
-      } else {
+      } else if (gameState.trainingBudget <= 400000) {
         trainingMsg = '⚡ <strong>Significant Training Investment:</strong> Comprehensive development is supporting organization-wide behavior change.';
+      } else {
+        trainingMsg = '⚠️ <strong>High Training Investment:</strong> Staff are well-trained, but returns on additional spending appear to be diminishing. Consider diversifying sustainability investments.';
       }
-      trainingFeedbackDiv.innerHTML = trainingMsg;
+      trainingDiv.className = 'bg-blue-900/30 border border-blue-700/50 rounded-2xl p-6 mb-4 text-sm';
+      trainingDiv.innerHTML = trainingMsg;
+      feedbackSection.appendChild(trainingDiv);
 
-      // Initiative feedback (3 selected items, feedback only)
-      const feedbackContainer = document.getElementById('initiative-feedback-container');
-      feedbackContainer.innerHTML = '';
+      const initiativeHeader = document.createElement('p');
+      initiativeHeader.className = 'text-emerald-400 font-semibold mb-3 text-sm';
+      initiativeHeader.textContent = '✓ Initiative Impact:';
+      feedbackSection.appendChild(initiativeHeader);
+
+      const initiativesContainer = document.createElement('div');
+      initiativesContainer.className = 'grid grid-cols-1 lg:grid-cols-3 gap-4';
       feedbacks.forEach(item => {
         const fb = document.createElement('div');
         fb.className = 'bg-slate-800/60 rounded-lg p-4 border border-emerald-700/30';
         fb.innerHTML = `
-          <p class="font-semibold text-emerald-400 mb-2">${item.name}</p>
-          <p class="text-slate-300 text-sm">${item.feedback}</p>
+          <p class="font-semibold text-emerald-400 mb-2 text-sm">${item.name}</p>
+          <p class="text-slate-300 text-xs">${item.feedback}</p>
         `;
-        feedbackContainer.appendChild(fb);
+        initiativesContainer.appendChild(fb);
       });
+      feedbackSection.appendChild(initiativesContainer);
 
-      // Events with updated feedback
       const eventsContainer = document.getElementById('events-container');
       eventsContainer.innerHTML = '';
       if (gameState.triggeredEvents.length > 0) {
         gameState.triggeredEvents.forEach(event => {
           const div = document.createElement('div');
-          const eventData = {
-            'energy-crisis': {
-              icon: '⚡',
-              title: 'Energy Crisis!',
-              message: 'The energy crisis is putting significant pressure on our hospital\'s profitability. Energy consumption remains above 35M kWh, and the introduction of Singapore\'s carbon tax has driven energy prices sharply upward, increasing annual operating costs by $465K and accelerating resource depletion.'
-            },
-            'flood': {
-              icon: '🌊',
-              title: 'Severe Flood!',
-              message: 'A severe flood engulfs your hospital. Without preparation, backup generators fail. Essential services shut down, forcing emergency diversions and equipment damage.'
-            },
-            'haze': {
-              icon: '🌫️',
-              title: 'Haze Crisis!',
-              message: 'Patients and staff express concerns over air quality during haze episodes. Complaints rising. Hospital experience negatively affected.'
-            }
-          };
-          const eventInfo = eventData[event];
-          if (eventInfo) {
-            div.className = 'bg-rose-900/30 border border-rose-700/50 rounded-lg p-4 mb-4';
-            div.innerHTML = `<strong>${eventInfo.icon} ${eventInfo.title}</strong> ${eventInfo.message}`;
-            eventsContainer.appendChild(div);
+          let eventContent = '';
+          
+          if (event === 'energy-crisis') {
+            const costImpact = gameState.eventImpacts.energy ? `$${(gameState.eventImpacts.energy / 1000).toFixed(0)}K` : '$465K';
+            eventContent = `⚡ <strong>Energy Crisis!</strong> The energy crisis is putting significant pressure on your hospital's profitability. Energy consumption remains above 35M kWh, and the introduction of Singapore's carbon tax has driven energy prices sharply upward, increasing annual operating costs by ${costImpact}.`;
+          } else if (event === 'flood') {
+            const costImpact = gameState.eventImpacts.flood ? `$${(gameState.eventImpacts.flood / 1000000).toFixed(1)}M` : '$2M';
+            eventContent = `🌊 <strong>Severe Flood!</strong> A severe flood engulfs your hospital. Without preparation, backup generators fail. Essential services shut down, forcing emergency diversions and equipment damage. Operating costs increased by ${costImpact}.`;
+          } else if (event === 'haze') {
+            eventContent = `🌫️ <strong>Haze Crisis!</strong> Patients and staff express concerns over air quality during haze episodes. Complaints rising. Hospital experience negatively affected.`;
           }
+          
+          div.className = 'bg-rose-900/30 border border-rose-700/50 rounded-lg p-4 mb-4';
+          div.innerHTML = eventContent;
+          eventsContainer.appendChild(div);
         });
       }
+      
       updateMetricsDisplay();
       setTimeout(() => createResultCharts(), 100);
+      
       if (gameState.currentYear < TOTAL_YEARS) {
         document.getElementById('action-buttons').innerHTML = `<button onclick="nextYear()" class="px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 rounded-xl font-bold text-white shadow-lg shadow-emerald-500/25 transition-all text-lg">Continue to Year ${gameState.currentYear + 1} →</button>`;
       } else {
@@ -557,7 +576,10 @@
 
     function nextYear() {
       const yearInitiatives = gameState.allInitiatives[`year-${gameState.currentYear}`];
-      gameState.carryoverInitiatives = yearInitiatives.filter(init => !gameState.selectedInitiatives.includes(init.id));
+      // Only carry over non-telemedicine initiatives that weren't selected
+      gameState.carryoverInitiatives = yearInitiatives.filter(init => 
+        !gameState.selectedInitiatives.includes(init.id) && !TELEMEDICINE_IDS.includes(init.id)
+      );
       loadYear(gameState.currentYear + 1);
     }
 
@@ -594,71 +616,45 @@
       charts = {};
       const costCtx = document.getElementById('chart-cost');
       charts.cost = new Chart(costCtx, {
-        type: 'line', data: { labels: years, datasets: [{ data: costData, borderColor: '#f59e0b', backgroundColor: 'rgba(245, 158, 11, 0.1)', fill: true, tension: 0.4, pointRadius: 3 }] },
-        options: chartOptions
+        type: 'line', data: { labels: years, datasets: [{ data: costData, borderColor: '#f59e0b', backgroundColor: 'rgba(245, 158, 11, 0.1)', fill: true, tension: 0.4, pointRadius: 5, pointBackgroundColor: '#f59e0b' }] }, options: chartOptions
       });
       const carbonCtx = document.getElementById('chart-carbon');
       charts.carbon = new Chart(carbonCtx, {
-        type: 'line', data: { labels: years, datasets: [{ data: carbonData, borderColor: '#ef4444', backgroundColor: 'rgba(239, 68, 68, 0.1)', fill: true, tension: 0.4, pointRadius: 3 }] },
-        options: chartOptions
+        type: 'line', data: { labels: years, datasets: [{ data: carbonData, borderColor: '#ef4444', backgroundColor: 'rgba(239, 68, 68, 0.1)', fill: true, tension: 0.4, pointRadius: 5, pointBackgroundColor: '#ef4444' }] }, options: chartOptions
       });
       const elecCtx = document.getElementById('chart-electricity');
       charts.electricity = new Chart(elecCtx, {
-        type: 'line', data: { labels: years, datasets: [{ data: elecData, borderColor: '#0ea5e9', backgroundColor: 'rgba(14, 165, 233, 0.1)', fill: true, tension: 0.4, pointRadius: 3 }] },
-        options: chartOptions
+        type: 'line', data: { labels: years, datasets: [{ data: elecData, borderColor: '#06b6d4', backgroundColor: 'rgba(6, 182, 212, 0.1)', fill: true, tension: 0.4, pointRadius: 5, pointBackgroundColor: '#06b6d4' }] }, options: chartOptions
       });
       const patientCtx = document.getElementById('chart-patient');
       charts.patient = new Chart(patientCtx, {
-        type: 'line', data: { labels: years, datasets: [{ data: patientData, borderColor: '#a855f7', backgroundColor: 'rgba(168, 85, 247, 0.1)', fill: true, tension: 0.4, pointRadius: 3 }] },
-        options: chartOptions
+        type: 'line', data: { labels: years, datasets: [{ data: patientData, borderColor: '#a855f7', backgroundColor: 'rgba(168, 85, 247, 0.1)', fill: true, tension: 0.4, pointRadius: 5, pointBackgroundColor: '#a855f7' }] }, options: chartOptions
       });
       const empCtx = document.getElementById('chart-employee');
       charts.employee = new Chart(empCtx, {
-        type: 'line', data: { labels: years, datasets: [{ data: empData, borderColor: '#3b82f6', backgroundColor: 'rgba(59, 130, 246, 0.1)', fill: true, tension: 0.4, pointRadius: 3 }] },
-        options: chartOptions
+        type: 'line', data: { labels: years, datasets: [{ data: empData, borderColor: '#3b82f6', backgroundColor: 'rgba(59, 130, 246, 0.1)', fill: true, tension: 0.4, pointRadius: 5, pointBackgroundColor: '#3b82f6' }] }, options: chartOptions
       });
       const ratingCtx = document.getElementById('chart-rating');
       charts.rating = new Chart(ratingCtx, {
-        type: 'line', data: { labels: years, datasets: [{ data: ratingData, borderColor: '#fbbf24', backgroundColor: 'rgba(251, 191, 36, 0.1)', fill: true, tension: 0.4, pointRadius: 3 }] },
-        options: chartOptions
+        type: 'line', data: { labels: years, datasets: [{ data: ratingData, borderColor: '#eab308', backgroundColor: 'rgba(234, 179, 8, 0.1)', fill: true, tension: 0.4, pointRadius: 5, pointBackgroundColor: '#eab308' }] }, options: chartOptions
       });
     }
 
     function showGameEnd() {
-      const carbonReduction = ((STARTING_METRICS.carbon - gameState.metrics.carbon) / STARTING_METRICS.carbon) * 100;
-      const success = gameState.metrics.carbon <= TARGET_CARBON;
-      let content = `
-        <div class="text-center space-y-6">
-          <div class="text-7xl">${success ? '🎉' : '🌱'}</div>
-          <h2 class="text-4xl font-bold ${success ? 'text-emerald-400' : 'text-amber-400'}">${success ? 'Mission Accomplished!' : 'Great Effort!'}</h2>
-          <div class="bg-slate-800/40 rounded-2xl p-8 space-y-4 border border-slate-700">
-            <div class="text-2xl font-bold">Final Results</div>
-            <div class="grid grid-cols-2 gap-4 text-left">
-              <div><span class="text-slate-400">Carbon Emissions:</span> <span class="font-bold text-lg ${success ? 'text-emerald-400' : 'text-rose-400'}">${gameState.metrics.carbon.toLocaleString()}t</span></div>
-              <div><span class="text-slate-400">Target:</span> <span class="font-bold text-lg">≤${TARGET_CARBON.toLocaleString()}t</span></div>
-              <div><span class="text-slate-400">Reduction:</span> <span class="font-bold text-lg text-emerald-400">${carbonReduction.toFixed(1)}%</span></div>
-              <div><span class="text-slate-400">Hospital Rating:</span> <span class="font-bold text-lg">${gameState.metrics.rating.toFixed(1)}/5</span></div>
-            </div>
-          </div>
-          ${success ? `<p class="text-emerald-300 text-lg">Your strategic decisions achieved a ${carbonReduction.toFixed(1)}% reduction, contributing significantly to Net Zero 2045!</p>` : `<p class="text-amber-300 text-lg">You achieved a ${carbonReduction.toFixed(1)}% reduction. Try again to reach 40% and Net Zero status!</p>`}
-          <button onclick="location.reload()" class="px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 rounded-xl font-bold text-white shadow-lg">Play Again</button>
+      document.getElementById('action-buttons').innerHTML = `
+        <div class="text-center">
+          <h3 class="text-3xl font-bold text-emerald-400 mb-4">🎉 7-Year Challenge Complete!</h3>
+          <p class="text-slate-300 mb-6">Final Carbon Reduction: <span class="font-bold text-emerald-400">${(((STARTING_METRICS.carbon - gameState.metrics.carbon) / STARTING_METRICS.carbon) * 100).toFixed(1)}%</span></p>
+          <button onclick="location.reload()" class="px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 rounded-xl font-bold text-white shadow-lg shadow-emerald-500/25 transition-all text-lg">Play Again</button>
         </div>
       `;
-      document.getElementById('action-buttons').innerHTML = content;
     }
 
     function showNotification(msg) {
-      const count = document.getElementById('selection-count');
-      const original = count.textContent;
-      count.textContent = msg;
-      count.classList.add('text-amber-400');
-      setTimeout(() => {
-        count.textContent = original;
-        count.classList.remove('text-amber-400');
-      }, 1500);
+      console.log(msg);
     }
 
-    window.addEventListener('DOMContentLoaded', initGame);
+    initGame();
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d233d9d70b96cc1',t:'MTc3MTgxMzE5MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d23ad1813bbfe01',t:'MTc3MTgxNzc1OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
