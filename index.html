@@ -3,7 +3,7 @@
  <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Healthcare Emissions Action Lab v127</title>
+  <title>Healthcare Emissions Action Lab</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&amp;display=swap" rel="stylesheet">
@@ -34,12 +34,28 @@
     
     #app { display: flex; flex-direction: column; }
     #game-content { flex: 1; overflow-y: auto; }
+    
+    @keyframes slideInScale {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+    
+    .end-screen-content {
+      animation: slideInScale 0.4s ease-out;
+    }
   </style>
-  <script src="https://cdn.tailwindcss.com/3.4.17" type="text/javascript"></script>
   <style>body { box-sizing: border-box; }</style>
+  <script src="https://cdn.tailwindcss.com/3.4.17" type="text/javascript"></script>
  </head>
  <body class="bg-gradient-to-br from-emerald-900 via-slate-900 to-emerald-950 text-white">
-  <div id="app"><!-- Welcome Screen -->
+  <div id="app">
+   <!-- Welcome Screen -->
    <div id="welcome-screen" class="w-full h-full flex flex-col items-center justify-center p-6 bg-gradient-to-br from-emerald-900 via-slate-900 to-emerald-950">
     <div class="text-center max-w-2xl animate-in">
      <div class="text-8xl mb-6">
@@ -70,7 +86,8 @@
      </div><button onclick="startGame()" class="px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 rounded-xl font-bold text-white shadow-lg shadow-emerald-500/25 transition-all text-lg">Begin Challenge → Year 1</button>
     </div>
    </div><!-- Game Screen -->
-   <div id="game-screen" class="hidden w-full h-full flex flex-col"><!-- Header -->
+   <div id="game-screen" class="hidden w-full h-full flex flex-col">
+    <!-- Header -->
     <header class="bg-slate-900/80 backdrop-blur border-b border-emerald-700/30 p-6 flex-shrink-0">
      <div class="max-w-7xl mx-auto">
       <div class="flex items-center justify-between mb-4">
@@ -121,8 +138,10 @@
      </div>
     </div><!-- Game Content -->
     <div id="game-content" class="flex-1 overflow-y-auto p-6">
-     <div class="max-w-7xl mx-auto"><!-- Decision Phase -->
-      <div id="decision-phase"><!-- Initiative Selection -->
+     <div class="max-w-7xl mx-auto">
+      <!-- Decision Phase -->
+      <div id="decision-phase">
+       <!-- Initiative Selection -->
        <div class="mb-8">
         <div class="flex items-center justify-between mb-6">
          <div>
@@ -168,10 +187,11 @@
        <div class="text-center mb-8"><button onclick="confirmYear()" class="px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 rounded-xl font-bold text-white shadow-lg shadow-emerald-500/25 transition-all text-lg">Complete Year &amp; See Results →</button>
        </div>
       </div><!-- Results Phase -->
-      <div id="results-phase" class="hidden pb-8"><!-- Year Summary -->
+      <div id="results-phase" class="hidden pb-8">
+       <!-- Year Summary -->
        <div class="mb-8">
-        <h2 class="text-3xl font-bold text-emerald-400 mb-6">📊 Year <span id="result-year">1</span> Results</h2><!-- Training Feedback + Initiative Feedback Combined -->
-        <div id="feedback-section" class="mb-6"></div><!-- Events -->
+        <h2 class="text-3xl font-bold text-emerald-400 mb-6">📊 Year <span id="result-year">1</span> Results</h2>
+        <div id="feedback-section" class="mb-6"></div>
         <div id="events-container" class="mb-6"></div>
        </div><!-- Charts -->
        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
@@ -219,13 +239,16 @@
       </div>
      </div>
     </div>
+   </div><!-- End Screen Overlay -->
+   <div id="end-screen-overlay" class="hidden fixed inset-0 bg-black/80 backdrop-blur flex items-center justify-center p-6 z-50 overflow-y-auto">
+    <div id="end-screen-content" class="end-screen-content my-8"></div>
    </div>
   </div>
   <script>
     const TOTAL_YEARS = 7;
     const STARTING_METRICS = { cost: 100000000, carbon: 30000, electricity: 40000000, patient: 80, employee: 80, rating: 3 };
     const TARGET_CARBON = 15000;
-    const TELEMEDICINE_IDS = ['y1-telemedicine', 'y2-telemedicine-expand', 'y3-remote-mental', 'y4-telemedicine-research', 'y5-telemedicine-rehab', 'y6-telemedicine-ed', 'y7-telemedicine-integrated'];
+    const TELEMEDICINE_CARRIED = 'y1-telemedicine';
 
     let gameState = {
       currentYear: 0,
@@ -247,8 +270,8 @@
     const initiativesDatabase = {
       'year-1': [
         { id: 'y1-cso', name: 'Chief Sustainability Officer', icon: '👔', category: 'leadership', description: 'Hire a dedicated Chief Sustainability Officer to lead sustainability initiatives and coordinate hospital-wide efforts.', effects: { cost: 102000, carbon: -2500, electricity: -515000, patient: 0, employee: 2, rating: 0 }, feedback: 'The CSO quickly began having an impact through structured sustainability efforts, increased staff engagement, and greater effectiveness of training programs.' },
-        { id: 'y1-board', name: 'Board Involvement', icon: '📋', category: 'leadership', description: 'Engage board members as sustainability champions to strengthen organizational commitment and accountability.', effects: { cost: 0, carbon: -1500, electricity: 0, patient: 0, employee: 1, rating: 1 }, feedback: 'Senior-level Board commitment is increasing staff engagement and strengthening the hospital\'s sustainability reputation.' },
-        { id: 'y1-telemedicine', name: 'Remote Consultations Program', icon: '💻', category: 'clinical', description: 'Launch initial telemedicine platform enabling patients to receive consultations remotely, reducing travel-related emissions and expanding healthcare access.', effects: { cost: 150000, carbon: -450, electricity: 120000, patient: 2, employee: 1, rating: 1 }, feedback: 'Telemedicine enables 15% of consultations remotely, significantly reducing patient travel emissions while improving healthcare accessibility.' },
+        { id: 'y1-board', name: 'Board Involvement', icon: '📋', category: 'leadership', description: 'Engage board members as sustainability champions to strengthen organizational commitment and accountability.', effects: { cost: 0, carbon: -1500, electricity: 0, patient: 0, employee: 1, rating: 0.3 }, feedback: 'Senior-level Board commitment is increasing staff engagement and strengthening the hospital\'s sustainability reputation.' },
+        { id: 'y1-telemedicine', name: 'Remote Consultations Program', icon: '💻', category: 'clinical', description: 'Launch initial telemedicine platform enabling patients to receive consultations remotely, reducing travel-related emissions and expanding healthcare access.', effects: { cost: 150000, carbon: -450, electricity: 120000, patient: 2, employee: 1, rating: 0.3 }, feedback: 'Telemedicine enables 15% of consultations remotely, significantly reducing patient travel emissions while improving healthcare accessibility.' },
         { id: 'y1-inhalers', name: 'Low Emission Inhalers', icon: '💨', category: 'clinical', description: 'Transition to low-emission inhaler technology that reduces propellant emissions by 50% with equivalent patient outcomes.', effects: { cost: 0, carbon: -160, electricity: 0, patient: 0, employee: 0, rating: 0 }, feedback: 'New low-emission inhalers reduce emissions by 50% with no negative impact on patient or staff care.' },
         { id: 'y1-prescription', name: 'Low Carbon Prescription Practices', icon: '💊', category: 'clinical', description: 'Implement evidence-based prescription protocols to reduce unnecessary medications and associated supply chain emissions.', effects: { cost: -1535000, carbon: -820, electricity: 0, patient: 0, employee: 0, rating: 0 }, feedback: 'New prescription practices reduce prescriptions and medication costs with no clinical quality impact.' },
         { id: 'y1-renewable', name: 'On-Site Renewable Energy', icon: '☀️', category: 'operations', description: 'Install solar panels and renewable generation systems to reduce grid electricity dependency and long-term energy costs.', effects: { cost: -10000, carbon: 0, electricity: -110000, patient: 0, employee: 0, rating: 0 }, feedback: 'Solar panels have been installed. Grid electricity consumption decreased. Embodied carbon impact will diminish in future years.' },
@@ -257,49 +280,43 @@
         { id: 'y1-fleet', name: 'Low Carbon Fleet', icon: '🚗', category: 'operations', description: 'Transition hospital transportation vehicles to electric and low-emission alternatives.', effects: { cost: -35000, carbon: -40, electricity: 65000, patient: 0, employee: 0, rating: 0 }, feedback: 'Low-emissions vehicles have high embodied carbon. Emissions benefits will be felt in future years.' },
         { id: 'y1-climate', name: 'Climate Control System', icon: '❄️', category: 'operations', description: 'Upgrade HVAC systems with smart controls and high-efficiency equipment to reduce energy consumption by 15%.', effects: { cost: -660000, carbon: -1200, electricity: -3000000, patient: 2, employee: 2, rating: 0 }, feedback: 'Climate control reduces HVAC consumption by 15%. Temperature comfort has improved significantly.' },
         { id: 'y1-plastic', name: 'Single-Use Plastic Reduction', icon: '♻️', category: 'supply', description: 'Replace single-use plastics with reusable or compostable alternatives throughout the hospital.', effects: { cost: -47000, carbon: -170, electricity: 0, patient: 0, employee: 1, rating: 0 }, feedback: 'Limiting single-use plastics reduces costs and waste emissions. Few complaints from staff or patients.' },
-        { id: 'y1-procurement', name: 'Low Carbon Procurement', icon: '🌿', category: 'supply', description: 'Establish purchasing policies favoring suppliers with verified low-carbon operations and sustainable practices.', effects: { cost: 0, carbon: -3400, electricity: 0, patient: 0, employee: 1, rating: 1 }, feedback: 'Selecting sustainable suppliers reduces purchasing emissions by 20% without significantly impacting costs.' }
+        { id: 'y1-procurement', name: 'Low Carbon Procurement', icon: '🌿', category: 'supply', description: 'Establish purchasing policies favoring suppliers with verified low-carbon operations and sustainable practices.', effects: { cost: 0, carbon: -3400, electricity: 0, patient: 0, employee: 1, rating: 0.3 }, feedback: 'Selecting sustainable suppliers reduces purchasing emissions by 20% without significantly impacting costs.' }
       ],
       'year-2': [
-        { id: 'y2-financing', name: 'Green Financing Mechanism', icon: '💚', category: 'leadership', description: 'Create a dedicated green financing fund to accelerate sustainable infrastructure investments and improvements.', effects: { cost: 0, carbon: 0, electricity: 0, patient: 0, employee: 3, rating: 1 }, feedback: 'Green financing improves employee awareness and engagement, setting the stage for future projects.' },
-        { id: 'y2-climate-plan', name: 'Planning for Disruptive Climate Events', icon: '🌊', category: 'leadership', description: 'Develop comprehensive disaster preparedness plans addressing flooding, extreme heat, and supply chain disruptions.', effects: { cost: 100000, carbon: 0, electricity: 0, patient: 0, employee: 0, rating: 1 }, feedback: 'Climate preparedness measures complete. Hospital resilience against flooding and extreme weather increased.' },
-        { id: 'y2-telemedicine-expand', name: 'Expand Telemedicine Network', icon: '📱', category: 'clinical', description: 'Expand telemedicine capabilities to include specialist consultations and follow-up care, enabling up to 30% of clinical interactions remotely.', effects: { cost: 200000, carbon: -850, electricity: 180000, patient: 3, employee: 2, rating: 2 }, feedback: 'Expanded telemedicine now covers 30% of patient interactions. Specialist consultations drive additional patient satisfaction and emissions reduction.' },
+        { id: 'y2-financing', name: 'Green Financing Mechanism', icon: '💚', category: 'leadership', description: 'Create a dedicated green financing fund to accelerate sustainable infrastructure investments and improvements.', effects: { cost: 0, carbon: 0, electricity: 0, patient: 0, employee: 3, rating: 0.5 }, feedback: 'Green financing improves employee awareness and engagement, setting the stage for future projects.' },
+        { id: 'y2-climate-plan', name: 'Planning for Disruptive Climate Events', icon: '🌊', category: 'leadership', description: 'Develop comprehensive disaster preparedness plans addressing flooding, extreme heat, and supply chain disruptions.', effects: { cost: 100000, carbon: 0, electricity: 0, patient: 0, employee: 0, rating: 0.3 }, feedback: 'Climate preparedness measures complete. Hospital resilience against flooding and extreme weather increased.' },
         { id: 'y2-attire', name: 'Reusable Clinical Attire', icon: '👔', category: 'clinical', description: 'Switch from single-use clinical clothing to durable, reusable uniforms managed through hospital laundry services.', effects: { cost: 0, carbon: -230, electricity: 0, patient: 0, employee: 1, rating: 0 }, feedback: 'Emissions from waste and purchasing have gone down. Cost impact is neutral with longer-lasting items.' },
         { id: 'y2-anesthetic', name: 'Low Emission Anesthetic Practices', icon: '💉', category: 'clinical', description: 'Reduce emissions from anesthetic gases by minimizing volatile anesthetic use and optimizing delivery methods.', effects: { cost: 0, carbon: -360, electricity: 0, patient: 0, employee: 0, rating: 0 }, feedback: 'Switching from desflurane and reducing flow rates achieves 30% emissions reduction per intervention safely.' },
-        { id: 'y2-haze', name: 'Carbon Filters & Haze Fans', icon: '🌫️', category: 'operations', description: 'Install air filtration systems and outdoor air quality monitoring to protect patients and staff during haze events.', effects: { cost: 50000, carbon: 0, electricity: 0, patient: 2, employee: 1, rating: 1 }, feedback: 'Air quality improvements during haze episodes are significantly benefiting patient and staff health.' },
-        { id: 'y2-cleanup', name: 'Annual Beach Clean-Up', icon: '🏖️', category: 'operations', description: 'Organize regular community environmental service days strengthening hospital reputation and team engagement.', effects: { cost: 0, carbon: -50, electricity: 0, patient: 0, employee: 4, rating: 2 }, feedback: 'Beach clean-up has strengthened the hospital\'s reputation as an environmental champion with excellent team morale.' },
+        { id: 'y2-haze', name: 'Carbon Filters & Haze Fans', icon: '🌫️', category: 'operations', description: 'Install air filtration systems and outdoor air quality monitoring to protect patients and staff during haze events.', effects: { cost: 50000, carbon: 0, electricity: 0, patient: 2, employee: 1, rating: 0.3 }, feedback: 'Air quality improvements during haze episodes are significantly benefiting patient and staff health.' },
+        { id: 'y2-cleanup', name: 'Annual Beach Clean-Up', icon: '🏖️', category: 'operations', description: 'Organize regular community environmental service days strengthening hospital reputation and team engagement.', effects: { cost: 0, carbon: -50, electricity: 0, patient: 0, employee: 4, rating: 0.5 }, feedback: 'Beach clean-up has strengthened the hospital\'s reputation as an environmental champion with excellent team morale.' },
         { id: 'y2-water', name: 'Efficient Use of Water', icon: '💧', category: 'operations', description: 'Install water-saving fixtures and optimize water heating systems to reduce consumption by 20%.', effects: { cost: -46500, carbon: -220, electricity: -100000, patient: 0, employee: 0, rating: 0 }, feedback: 'Water conservation measures cut consumption by 20% with reduced electricity from water heating.' },
         { id: 'y2-insulation', name: 'Improve Insulation', icon: '🧊', category: 'operations', description: 'Upgrade building insulation and seal air leaks to improve thermal efficiency and reduce heating/cooling needs.', effects: { cost: -130000, carbon: -380, electricity: -1000000, patient: 1, employee: 0, rating: 0 }, feedback: 'Insulation improvements reduce HVAC energy by 1M kWh with notable cost savings.' },
-        { id: 'y2-reprocessing', name: 'Medical Device Reprocessing', icon: '🔧', category: 'supply', description: 'Implement sterile reprocessing programs for single-use medical devices where clinically safe to reduce waste.', effects: { cost: -47000, carbon: -1000, electricity: 0, patient: 0, employee: 0, rating: 1 }, feedback: 'Device reprocessing reduces medical waste emissions while saving $47K annually without care quality impact.' }
+        { id: 'y2-reprocessing', name: 'Medical Device Reprocessing', icon: '🔧', category: 'supply', description: 'Implement sterile reprocessing programs for single-use medical devices where clinically safe to reduce waste.', effects: { cost: -47000, carbon: -1000, electricity: 0, patient: 0, employee: 0, rating: 0.3 }, feedback: 'Device reprocessing reduces medical waste emissions while saving $47K annually without care quality impact.' }
       ],
       'year-3': [
-        { id: 'y3-commitment', name: 'Public Commitment', icon: '📢', category: 'leadership', description: 'Make formal public commitments to Net Zero targets, improving transparency and accountability to stakeholders.', effects: { cost: -350000, carbon: -630, electricity: -1500000, patient: 1, employee: 2, rating: 2 }, feedback: 'Public commitment to emissions reduction has improved hospital ratings and increased Board and staff engagement.' },
-        { id: 'y3-behavior', name: 'Behavior-Change Programme', icon: '🎯', category: 'leadership', description: 'Launch employee engagement campaigns to reduce energy use through behavioral changes (turning off lights, adjusting thermostats).', effects: { cost: -530000, carbon: -830, electricity: -2370000, patient: 2, employee: 3, rating: 1 }, feedback: 'TLC-inspired behavior changes reduce lighting and HVAC consumption significantly while improving patient sleep quality.' },
-        { id: 'y3-remote-mental', name: 'Mental Health Telemedicine Services', icon: '🧠', category: 'clinical', description: 'Launch dedicated telemedicine platform for mental health and psychological support, eliminating unnecessary patient travel for therapy sessions.', effects: { cost: 100000, carbon: -300, electricity: 80000, patient: 4, employee: 1, rating: 1 }, feedback: 'Mental health telemedicine reduces patient travel emissions while improving accessibility to mental health services.' },
-        { id: 'y3-inpatient', name: 'Reduce Avoidable Inpatient Days', icon: '🛏️', category: 'clinical', description: 'Improve discharge protocols and community partnerships to safely reduce unnecessary overnight hospital stays.', effects: { cost: 0, carbon: -210, electricity: 0, patient: 1, employee: 1, rating: 1 }, feedback: 'Reducing unnecessary overnight stays improves efficiency and reduces carbon intensity per patient admission.' },
+        { id: 'y3-commitment', name: 'Public Commitment', icon: '📢', category: 'leadership', description: 'Make formal public commitments to Net Zero targets, improving transparency and accountability to stakeholders.', effects: { cost: -350000, carbon: -630, electricity: -1500000, patient: 1, employee: 2, rating: 0.5 }, feedback: 'Public commitment to emissions reduction has improved hospital ratings and increased Board and staff engagement.' },
+        { id: 'y3-behavior', name: 'Behavior-Change Programme', icon: '🎯', category: 'leadership', description: 'Launch employee engagement campaigns to reduce energy use through behavioral changes (turning off lights, adjusting thermostats).', effects: { cost: -530000, carbon: -830, electricity: -2370000, patient: 2, employee: 3, rating: 0.3 }, feedback: 'TLC-inspired behavior changes reduce lighting and HVAC consumption significantly while improving patient sleep quality.' },
+        { id: 'y3-inpatient', name: 'Reduce Avoidable Inpatient Days', icon: '🛏️', category: 'clinical', description: 'Improve discharge protocols and community partnerships to safely reduce unnecessary overnight hospital stays.', effects: { cost: 0, carbon: -210, electricity: 0, patient: 1, employee: 1, rating: 0.3 }, feedback: 'Reducing unnecessary overnight stays improves efficiency and reduces carbon intensity per patient admission.' },
         { id: 'y3-diagnostics', name: 'Reduce Unnecessary Diagnostic Tests', icon: '🔬', category: 'clinical', description: 'Update clinical protocols to eliminate redundant diagnostic tests while maintaining diagnostic accuracy and outcomes.', effects: { cost: -75000, carbon: -100, electricity: 0, patient: 0, employee: 1, rating: 0 }, feedback: 'Updated clinical protocols for essential tests save costs, reduce waste, with no clinical quality impact.' },
         { id: 'y3-lights', name: 'Install Light Sensors', icon: '🔆', category: 'operations', description: 'Deploy motion sensors and occupancy-based lighting controls to automatically manage lighting in corridors and common areas.', effects: { cost: -50000, carbon: -100, electricity: -350000, patient: 0, employee: 1, rating: 0 }, feedback: 'Lighting sensors reduce energy in corridors by 60% with no negative staff or patient impact.' },
         { id: 'y3-biodigester', name: 'Biodigester Installation', icon: '♻️', category: 'operations', description: 'Install biodigestion systems to convert food waste into energy, reducing landfill volume and emissions.', effects: { cost: 0, carbon: -240, electricity: 0, patient: 0, employee: 0, rating: 0 }, feedback: 'Biodigester reduces food waste volume and emissions. Impact multiplied if combined with waste reduction.' },
-        { id: 'y3-food', name: 'Low Emissions Food Programme', icon: '🥗', category: 'supply', description: 'Shift hospital food sourcing to local, seasonal, and plant-based options with lower supply chain carbon footprint.', effects: { cost: -300000, carbon: -1150, electricity: 0, patient: 1, employee: 2, rating: 1 }, feedback: 'Locally sourced, seasonal, and plant-based options reduce food-related emissions by significant margin.' }
+        { id: 'y3-food', name: 'Low Emissions Food Programme', icon: '🥗', category: 'supply', description: 'Shift hospital food sourcing to local, seasonal, and plant-based options with lower supply chain carbon footprint.', effects: { cost: -300000, carbon: -1150, electricity: 0, patient: 1, employee: 2, rating: 0.3 }, feedback: 'Locally sourced, seasonal, and plant-based options reduce food-related emissions by significant margin.' }
       ],
       'year-4': [
-        { id: 'y4-travel', name: 'Green Travel Plan', icon: '🚴', category: 'leadership', description: 'Develop incentive programs for sustainable commuting including bike infrastructure, public transit subsidies, and carpooling.', effects: { cost: 9300, carbon: -650, electricity: 0, patient: 0, employee: 2, rating: 1 }, feedback: 'Improved bike lanes and transit incentives encourage sustainable commuting, reducing travel emissions by up to 20%.' },
-        { id: 'y4-telemedicine-research', name: 'Telemedicine for Patient Monitoring', icon: '⌚', category: 'clinical', description: 'Implement remote monitoring systems for chronic disease patients, enabling continuous care from home and reducing hospital visits by 25%.', effects: { cost: 120000, carbon: -550, electricity: 100000, patient: 3, employee: 1, rating: 1 }, feedback: 'Remote monitoring systems keep patients engaged from home, reducing unnecessary hospital visits and travel emissions.' },
+        { id: 'y4-travel', name: 'Green Travel Plan', icon: '🚴', category: 'leadership', description: 'Develop incentive programs for sustainable commuting including bike infrastructure, public transit subsidies, and carpooling.', effects: { cost: 9300, carbon: -650, electricity: 0, patient: 0, employee: 2, rating: 0.3 }, feedback: 'Improved bike lanes and transit incentives encourage sustainable commuting, reducing travel emissions by up to 20%.' },
         { id: 'y4-waste', name: 'Hazardous Waste Segregation', icon: '⚠️', category: 'operations', description: 'Implement advanced waste segregation protocols to reduce hazardous waste volume and improve recycling rates.', effects: { cost: 23000, carbon: -180, electricity: 0, patient: 0, employee: 0, rating: 0 }, feedback: 'Better waste segregation reduces hazardous waste volume and disposal costs while increasing recycling.' },
-        { id: 'y4-green-spaces', name: 'Optimize Green Spaces', icon: '🌳', category: 'operations', description: 'Expand hospital grounds with native vegetation and green roofs to improve air quality and staff wellbeing.', effects: { cost: 28000, carbon: 0, electricity: 0, patient: 3, employee: 3, rating: 1 }, feedback: 'Increased vegetation around hospital improves air quality and makes grounds more appealing.' },
+        { id: 'y4-green-spaces', name: 'Optimize Green Spaces', icon: '🌳', category: 'operations', description: 'Expand hospital grounds with native vegetation and green roofs to improve air quality and staff wellbeing.', effects: { cost: 28000, carbon: 0, electricity: 0, patient: 3, employee: 3, rating: 0.3 }, feedback: 'Increased vegetation around hospital improves air quality and makes grounds more appealing.' },
         { id: 'y4-food-waste', name: 'Reduce Food Waste', icon: '🍎', category: 'supply', description: 'Implement flexible meal portions and food donation programs to minimize food waste and loss.', effects: { cost: -140000, carbon: -100, electricity: 0, patient: 0, employee: 1, rating: 0 }, feedback: 'Flexible portions and donation programs reduce food waste emissions by 20% while saving 5% on food costs.' }
       ],
       'year-5': [
-        { id: 'y5-rating', name: 'Get Sustainability Rating (ISO & JCI)', icon: '🏆', category: 'leadership', description: 'Pursue ISO 14001 and JCI sustainability certifications to formalize and validate sustainability operations.', effects: { cost: 18600, carbon: 0, electricity: 0, patient: 1, employee: 2, rating: 2 }, feedback: 'Sustainability certification has promoted accountability and positioned hospital as environmental champion.' },
-        { id: 'y5-telemedicine-rehab', name: 'Virtual Rehabilitation Program', icon: '🏃', category: 'clinical', description: 'Launch virtual rehabilitation and physiotherapy services allowing post-operative patients to continue recovery at home with remote guidance.', effects: { cost: 80000, carbon: -400, electricity: 70000, patient: 3, employee: 1, rating: 1 }, feedback: 'Virtual rehabilitation enables faster recovery with fewer hospital visits, reducing patient travel emissions and improving outcomes.' },
+        { id: 'y5-rating', name: 'Get Sustainability Rating (ISO & JCI)', icon: '🏆', category: 'leadership', description: 'Pursue ISO 14001 and JCI sustainability certifications to formalize and validate sustainability operations.', effects: { cost: 18600, carbon: 0, electricity: 0, patient: 1, employee: 2, rating: 0.5 }, feedback: 'Sustainability certification has promoted accountability and positioned hospital as environmental champion.' },
         { id: 'y5-ac', name: 'Air Conditioning System Upgrade', icon: '❄️', category: 'operations', description: 'Replace outdated HVAC equipment with modern high-efficiency units using low-GWP refrigerants.', effects: { cost: -1260000, carbon: -2000, electricity: -500000, patient: 2, employee: 1, rating: 0 }, feedback: 'Modern energy-efficient AC units achieve 30% HVAC reduction with improved comfort.' },
         { id: 'y5-cleaning', name: 'Eco-Friendly Cleaning Materials', icon: '🧹', category: 'supply', description: 'Transition all cleaning products to biodegradable, eco-certified formulations safe for patients and environment.', effects: { cost: 52000, carbon: -50, electricity: 0, patient: 0, employee: 1, rating: 0 }, feedback: 'Eco-friendly products reduce water consumption and chemical pollution with minimal emissions impact.' }
       ],
       'year-6': [
-        { id: 'y6-telemedicine-ed', name: 'Telemedicine Emergency Triage', icon: '🚑', category: 'clinical', description: 'Implement emergency virtual triage system to assess patients remotely first, directing them to appropriate care levels and reducing unnecessary ED visits.', effects: { cost: 150000, carbon: -600, electricity: 110000, patient: 2, employee: 2, rating: 1 }, feedback: 'Virtual emergency triage reduces unnecessary ED visits by 20%, cutting patient travel emissions and improving ED efficiency.' },
         { id: 'y6-waste-reduction', name: 'Waste Reduction Programme', icon: '🗑️', category: 'supply', description: 'Establish bulk purchasing agreements and reduce packaging waste across all procurement categories.', effects: { cost: -2300, carbon: -238, electricity: 0, patient: 0, employee: 1, rating: 0 }, feedback: 'Bulk purchasing and reduced packaging lower waste emissions and generate cost savings.' }
       ],
       'year-7': [
-        { id: 'y7-telemedicine-integrated', name: 'Integrated Telemedicine Hub', icon: '🌐', category: 'clinical', description: 'Create comprehensive integrated telemedicine hub connecting all departments and patient populations for seamless remote care delivery.', effects: { cost: 0, carbon: -700, electricity: 150000, patient: 4, employee: 2, rating: 2 }, feedback: 'Integrated telemedicine hub successfully handles 40% of patient interactions remotely, maximizing emissions reduction while maintaining care quality.' },
         { id: 'y7-reusable', name: 'Reusable Product Initiative', icon: '🔁', category: 'supply', description: 'Expand reusable product programs across clinical gowns, linens, and containers, reducing waste and purchasing.', effects: { cost: -46500, carbon: -410, electricity: 0, patient: 1, employee: 1, rating: 0 }, feedback: 'Reusable gowns, linens, and containers reduce purchasing and waste emissions by 10% safely.' }
       ]
     };
@@ -353,9 +370,8 @@
 
     function populateInitiatives(year) {
       const yearInitiatives = initiativesDatabase[`year-${year}`] || [];
-      // Filter out telemedicine initiatives if one has already been selected
       const filteredYearInitiatives = yearInitiatives.filter(init => {
-        if (TELEMEDICINE_IDS.includes(init.id) && gameState.telemedicineSelected) {
+        if (year > 1 && init.id === TELEMEDICINE_CARRIED && gameState.telemedicineSelected) {
           return false;
         }
         return true;
@@ -433,8 +449,7 @@
           gameState.metrics.rating += initiative.effects.rating;
           feedbacks.push({ name: initiative.name, feedback: initiative.feedback });
           gameState.allSelectedOverGame.push(id);
-          // Mark telemedicine as selected if this is a telemedicine initiative
-          if (TELEMEDICINE_IDS.includes(id)) {
+          if (id === TELEMEDICINE_CARRIED) {
             gameState.telemedicineSelected = true;
           }
         }
@@ -471,10 +486,10 @@
       gameState.eventImpacts = {};
       
       if (year === 3 && gameState.metrics.electricity > 35000000) {
-        const energyCost = 465000;
-        gameState.metrics.cost += energyCost;
-        gameState.eventImpacts.energy = energyCost;
-        gameState.triggeredEvents.push('energy-crisis');
+        const taxCost = 465000;
+        gameState.metrics.cost += taxCost;
+        gameState.eventImpacts.tax = taxCost;
+        gameState.triggeredEvents.push('carbon-tax');
       }
       
       if (year === 4 && !gameState.allSelectedOverGame.includes('y2-climate-plan')) {
@@ -482,6 +497,7 @@
         gameState.metrics.cost += floodCost;
         gameState.metrics.patient -= 20;
         gameState.metrics.employee -= 20;
+        gameState.metrics.rating -= 3;
         gameState.eventImpacts.flood = floodCost;
         gameState.triggeredEvents.push('flood');
       }
@@ -548,12 +564,12 @@
           const div = document.createElement('div');
           let eventContent = '';
           
-          if (event === 'energy-crisis') {
-            const costImpact = gameState.eventImpacts.energy ? `$${(gameState.eventImpacts.energy / 1000).toFixed(0)}K` : '$465K';
-            eventContent = `⚡ <strong>Energy Crisis!</strong> The energy crisis is putting significant pressure on your hospital's profitability. Energy consumption remains above 35M kWh, and the introduction of Singapore's carbon tax has driven energy prices sharply upward, increasing annual operating costs by ${costImpact}.`;
+          if (event === 'carbon-tax') {
+            const costImpact = gameState.eventImpacts.tax ? `$${(gameState.eventImpacts.tax / 1000).toFixed(0)}K` : '$465K';
+            eventContent = `⚡ <strong>Carbon Tax Imposed!</strong> Singapore's new carbon tax is putting significant pressure on your hospital's profitability. Energy consumption remains above 35M kWh, and the carbon tax on fossil fuel energy has driven energy prices sharply upward, increasing annual operating costs by ${costImpact}.`;
           } else if (event === 'flood') {
             const costImpact = gameState.eventImpacts.flood ? `$${(gameState.eventImpacts.flood / 1000000).toFixed(1)}M` : '$2M';
-            eventContent = `🌊 <strong>Severe Flood!</strong> A severe flood engulfs your hospital. Without preparation, backup generators fail. Essential services shut down, forcing emergency diversions and equipment damage. Operating costs increased by ${costImpact}.`;
+            eventContent = `🌊 <strong>Severe Flood!</strong> A severe flood engulfs your hospital. Without preparation, backup generators fail. Essential services shut down, forcing emergency diversions and equipment damage. Operating costs increased by ${costImpact}. Hospital rating has been severely damaged.`;
           } else if (event === 'haze') {
             eventContent = `🌫️ <strong>Haze Crisis!</strong> Patients and staff express concerns over air quality during haze episodes. Complaints rising. Hospital experience negatively affected.`;
           }
@@ -570,16 +586,21 @@
       if (gameState.currentYear < TOTAL_YEARS) {
         document.getElementById('action-buttons').innerHTML = `<button onclick="nextYear()" class="px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 rounded-xl font-bold text-white shadow-lg shadow-emerald-500/25 transition-all text-lg">Continue to Year ${gameState.currentYear + 1} →</button>`;
       } else {
-        showGameEnd();
+        setTimeout(showGameEnd, 500);
       }
     }
 
     function nextYear() {
       const yearInitiatives = gameState.allInitiatives[`year-${gameState.currentYear}`];
-      // Only carry over non-telemedicine initiatives that weren't selected
       gameState.carryoverInitiatives = yearInitiatives.filter(init => 
-        !gameState.selectedInitiatives.includes(init.id) && !TELEMEDICINE_IDS.includes(init.id)
+        !gameState.selectedInitiatives.includes(init.id) && init.id !== TELEMEDICINE_CARRIED
       );
+      if (gameState.currentYear === 1 && !gameState.telemedicineSelected) {
+        const telemedInit = initiativesDatabase['year-1'].find(i => i.id === TELEMEDICINE_CARRIED);
+        if (telemedInit) {
+          gameState.carryoverInitiatives.push(telemedInit);
+        }
+      }
       loadYear(gameState.currentYear + 1);
     }
 
@@ -605,56 +626,120 @@
           y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: 'rgba(255,255,255,0.5)', font: { size: 10 } } }
         }
       };
-      const years = Array.from({ length: gameState.historyMetrics.length }, (_, i) => i === 0 ? 'Start' : `Y${i}`);
-      const costData = gameState.historyMetrics.map(m => m.cost / 1000000);
-      const carbonData = gameState.historyMetrics.map(m => m.carbon);
-      const elecData = gameState.historyMetrics.map(m => m.electricity / 1000000);
-      const patientData = gameState.historyMetrics.map(m => m.patient);
-      const empData = gameState.historyMetrics.map(m => m.employee);
-      const ratingData = gameState.historyMetrics.map(m => m.rating);
-      Object.values(charts).forEach(c => c && c.destroy && c.destroy());
-      charts = {};
-      const costCtx = document.getElementById('chart-cost');
-      charts.cost = new Chart(costCtx, {
-        type: 'line', data: { labels: years, datasets: [{ data: costData, borderColor: '#f59e0b', backgroundColor: 'rgba(245, 158, 11, 0.1)', fill: true, tension: 0.4, pointRadius: 5, pointBackgroundColor: '#f59e0b' }] }, options: chartOptions
+      const years = Array.from({ length: gameState.historyMetrics.length }, (_, i) => `Y${i}`);
+      const costs = gameState.historyMetrics.map(m => m.cost / 1000000);
+      const carbons = gameState.historyMetrics.map(m => m.carbon);
+      const electricity = gameState.historyMetrics.map(m => m.electricity / 1000000);
+      const patient = gameState.historyMetrics.map(m => m.patient);
+      const employee = gameState.historyMetrics.map(m => m.employee);
+      const rating = gameState.historyMetrics.map(m => m.rating);
+
+      if (charts.cost) charts.cost.destroy();
+      charts.cost = new Chart(document.getElementById('chart-cost'), {
+        type: 'line',
+        data: { labels: years, datasets: [{ label: 'Cost', data: costs, borderColor: '#f59e0b', backgroundColor: 'rgba(245,158,11,0.1)', fill: true, tension: 0.4, pointRadius: 4, pointBackgroundColor: '#f59e0b' }] },
+        options: chartOptions
       });
-      const carbonCtx = document.getElementById('chart-carbon');
-      charts.carbon = new Chart(carbonCtx, {
-        type: 'line', data: { labels: years, datasets: [{ data: carbonData, borderColor: '#ef4444', backgroundColor: 'rgba(239, 68, 68, 0.1)', fill: true, tension: 0.4, pointRadius: 5, pointBackgroundColor: '#ef4444' }] }, options: chartOptions
+
+      if (charts.carbon) charts.carbon.destroy();
+      charts.carbon = new Chart(document.getElementById('chart-carbon'), {
+        type: 'line',
+        data: { labels: years, datasets: [{ label: 'Carbon', data: carbons, borderColor: '#f43f5e', backgroundColor: 'rgba(244,63,94,0.1)', fill: true, tension: 0.4, pointRadius: 4, pointBackgroundColor: '#f43f5e' }] },
+        options: chartOptions
       });
-      const elecCtx = document.getElementById('chart-electricity');
-      charts.electricity = new Chart(elecCtx, {
-        type: 'line', data: { labels: years, datasets: [{ data: elecData, borderColor: '#06b6d4', backgroundColor: 'rgba(6, 182, 212, 0.1)', fill: true, tension: 0.4, pointRadius: 5, pointBackgroundColor: '#06b6d4' }] }, options: chartOptions
+
+      if (charts.electricity) charts.electricity.destroy();
+      charts.electricity = new Chart(document.getElementById('chart-electricity'), {
+        type: 'line',
+        data: { labels: years, datasets: [{ label: 'Electricity', data: electricity, borderColor: '#0ea5e9', backgroundColor: 'rgba(14,165,233,0.1)', fill: true, tension: 0.4, pointRadius: 4, pointBackgroundColor: '#0ea5e9' }] },
+        options: chartOptions
       });
-      const patientCtx = document.getElementById('chart-patient');
-      charts.patient = new Chart(patientCtx, {
-        type: 'line', data: { labels: years, datasets: [{ data: patientData, borderColor: '#a855f7', backgroundColor: 'rgba(168, 85, 247, 0.1)', fill: true, tension: 0.4, pointRadius: 5, pointBackgroundColor: '#a855f7' }] }, options: chartOptions
+
+      if (charts.patient) charts.patient.destroy();
+      charts.patient = new Chart(document.getElementById('chart-patient'), {
+        type: 'line',
+        data: { labels: years, datasets: [{ label: 'Patient', data: patient, borderColor: '#a855f7', backgroundColor: 'rgba(168,85,247,0.1)', fill: true, tension: 0.4, pointRadius: 4, pointBackgroundColor: '#a855f7' }] },
+        options: chartOptions
       });
-      const empCtx = document.getElementById('chart-employee');
-      charts.employee = new Chart(empCtx, {
-        type: 'line', data: { labels: years, datasets: [{ data: empData, borderColor: '#3b82f6', backgroundColor: 'rgba(59, 130, 246, 0.1)', fill: true, tension: 0.4, pointRadius: 5, pointBackgroundColor: '#3b82f6' }] }, options: chartOptions
+
+      if (charts.employee) charts.employee.destroy();
+      charts.employee = new Chart(document.getElementById('chart-employee'), {
+        type: 'line',
+        data: { labels: years, datasets: [{ label: 'Employee', data: employee, borderColor: '#3b82f6', backgroundColor: 'rgba(59,130,246,0.1)', fill: true, tension: 0.4, pointRadius: 4, pointBackgroundColor: '#3b82f6' }] },
+        options: chartOptions
       });
-      const ratingCtx = document.getElementById('chart-rating');
-      charts.rating = new Chart(ratingCtx, {
-        type: 'line', data: { labels: years, datasets: [{ data: ratingData, borderColor: '#eab308', backgroundColor: 'rgba(234, 179, 8, 0.1)', fill: true, tension: 0.4, pointRadius: 5, pointBackgroundColor: '#eab308' }] }, options: chartOptions
+
+      if (charts.rating) charts.rating.destroy();
+      charts.rating = new Chart(document.getElementById('chart-rating'), {
+        type: 'line',
+        data: { labels: years, datasets: [{ label: 'Rating', data: rating, borderColor: '#eab308', backgroundColor: 'rgba(234,179,8,0.1)', fill: true, tension: 0.4, pointRadius: 4, pointBackgroundColor: '#eab308' }] },
+        options: chartOptions
       });
     }
 
     function showGameEnd() {
-      document.getElementById('action-buttons').innerHTML = `
-        <div class="text-center">
-          <h3 class="text-3xl font-bold text-emerald-400 mb-4">🎉 7-Year Challenge Complete!</h3>
-          <p class="text-slate-300 mb-6">Final Carbon Reduction: <span class="font-bold text-emerald-400">${(((STARTING_METRICS.carbon - gameState.metrics.carbon) / STARTING_METRICS.carbon) * 100).toFixed(1)}%</span></p>
+      const overlayDiv = document.getElementById('end-screen-overlay');
+      const contentDiv = document.getElementById('end-screen-content');
+      
+      let endMessage = '';
+      const carbonReduction = ((STARTING_METRICS.carbon - gameState.metrics.carbon) / STARTING_METRICS.carbon) * 100;
+      const targetMet = gameState.metrics.carbon <= TARGET_CARBON;
+      const costPerformance = gameState.metrics.cost < STARTING_METRICS.cost ? 'improved' : 'increased';
+      const ratingPerformance = gameState.metrics.rating;
+
+      if (targetMet) {
+        endMessage = `🎉 <strong>Net Zero Success!</strong> Your hospital achieved ${carbonReduction.toFixed(1)}% carbon reduction, surpassing the 50% target. Final hospital rating: ${gameState.metrics.rating.toFixed(1)}/5. Operating costs ${costPerformance}. Your leadership in healthcare sustainability is now recognized globally.`;
+      } else if (carbonReduction >= 40) {
+        endMessage = `✅ <strong>Major Progress!</strong> Your hospital achieved ${carbonReduction.toFixed(1)}% carbon reduction, narrowly missing the 50% target. Final hospital rating: ${gameState.metrics.rating.toFixed(1)}/5. Consider accelerating high-impact initiatives next cycle.`;
+      } else if (carbonReduction >= 25) {
+        endMessage = `⚠️ <strong>Moderate Progress.</strong> Your hospital achieved ${carbonReduction.toFixed(1)}% carbon reduction. Final hospital rating: ${gameState.metrics.rating.toFixed(1)}/5. Significant work remains to reach Net Zero by 2045.`;
+      } else {
+        endMessage = `❌ <strong>Insufficient Progress.</strong> Your hospital achieved only ${carbonReduction.toFixed(1)}% carbon reduction. Final hospital rating: ${gameState.metrics.rating.toFixed(1)}/5. Urgent action needed to meet sustainability targets.`;
+      }
+
+      contentDiv.innerHTML = `
+        <div class="max-w-2xl mx-auto bg-slate-800 rounded-3xl p-8 border border-emerald-700/50 text-center">
+          <div class="text-6xl mb-6">🌍</div>
+          <h2 class="text-4xl font-bold text-emerald-400 mb-6">Challenge Complete!</h2>
+          <div class="bg-slate-900 rounded-2xl p-6 mb-8 border border-slate-700">
+            <p class="text-slate-200 text-lg mb-6">${endMessage}</p>
+            <div class="grid grid-cols-2 gap-4 text-left">
+              <div class="bg-slate-800/60 rounded-lg p-4">
+                <p class="text-slate-400 text-sm">Carbon Reduction</p>
+                <p class="text-2xl font-bold text-rose-400">${carbonReduction.toFixed(1)}%</p>
+              </div>
+              <div class="bg-slate-800/60 rounded-lg p-4">
+                <p class="text-slate-400 text-sm">Final Rating</p>
+                <p class="text-2xl font-bold text-yellow-400">${gameState.metrics.rating.toFixed(1)}/5</p>
+              </div>
+              <div class="bg-slate-800/60 rounded-lg p-4">
+                <p class="text-slate-400 text-sm">Final Cost</p>
+                <p class="text-2xl font-bold text-amber-400">$${(gameState.metrics.cost / 1000000).toFixed(1)}M</p>
+              </div>
+              <div class="bg-slate-800/60 rounded-lg p-4">
+                <p class="text-slate-400 text-sm">Final Emissions</p>
+                <p class="text-2xl font-bold text-emerald-400">${gameState.metrics.carbon.toLocaleString()}t</p>
+              </div>
+            </div>
+          </div>
           <button onclick="location.reload()" class="px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 rounded-xl font-bold text-white shadow-lg shadow-emerald-500/25 transition-all text-lg">Play Again</button>
         </div>
       `;
+      overlayDiv.classList.remove('hidden');
     }
 
     function showNotification(msg) {
-      console.log(msg);
+      const countElement = document.getElementById('selection-count');
+      const original = countElement.textContent;
+      countElement.textContent = msg;
+      countElement.classList.add('text-amber-400');
+      setTimeout(() => {
+        countElement.textContent = original;
+        countElement.classList.remove('text-amber-400');
+      }, 2000);
     }
 
     initGame();
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d23ad1813bbfe01',t:'MTc3MTgxNzc1OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d2464fb97b0c90f',t:'MTc3MTgyNTI4OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
