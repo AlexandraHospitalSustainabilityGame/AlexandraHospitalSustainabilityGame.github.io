@@ -36,19 +36,11 @@
     #game-content { flex: 1; overflow-y: auto; }
     
     @keyframes slideInScale {
-      from {
-        opacity: 0;
-        transform: scale(0.95);
-      }
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
     }
     
-    .end-screen-content {
-      animation: slideInScale 0.4s ease-out;
-    }
+    .end-screen-content { animation: slideInScale 0.4s ease-out; }
   </style>
   <style>body { box-sizing: border-box; }</style>
   <script src="https://cdn.tailwindcss.com/3.4.17" type="text/javascript"></script>
@@ -99,7 +91,7 @@
         <p class="text-sm text-slate-400">Progress</p>
         <p class="text-2xl font-bold text-emerald-400"><span id="progress">0</span>/7 Years</p>
        </div>
-      </div><!-- Carbon Reduction Bar -->
+      </div>
       <div class="space-y-2">
        <div class="flex justify-between items-center text-sm"><span class="text-slate-400">Carbon Reduction Progress</span> <span class="font-semibold text-emerald-400"><span id="carbon-percent">0</span>% → Goal: 50%</span>
        </div>
@@ -141,7 +133,6 @@
      <div class="max-w-7xl mx-auto">
       <!-- Decision Phase -->
       <div id="decision-phase">
-       <!-- Initiative Selection -->
        <div class="mb-8">
         <div class="flex items-center justify-between mb-6">
          <div>
@@ -152,7 +143,7 @@
           <p class="text-xs text-slate-400 mb-1">Initiatives Selected</p>
           <p class="text-3xl font-bold bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent"><span id="selection-count">0</span><span class="text-slate-400">/3</span></p>
          </div>
-        </div><!-- Categories -->
+        </div>
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
          <div class="bg-slate-800/40 rounded-2xl p-6 border border-slate-700/50">
           <h3 class="text-emerald-400 font-bold mb-4 flex items-center gap-2">🏛️ Leadership &amp; Governance</h3>
@@ -171,7 +162,7 @@
           <div class="space-y-3" id="supply-decisions"></div>
          </div>
         </div>
-       </div><!-- Training Budget -->
+       </div>
        <div class="bg-slate-800/40 rounded-2xl p-6 border border-slate-700/50 mb-8">
         <h2 class="text-2xl font-bold text-emerald-400 mb-6">💼 Staff Training Budget</h2>
         <p class="text-slate-400 mb-4">Invest in staff training for climate change awareness (2,000 employees)</p>
@@ -179,21 +170,19 @@
          <div>
           <div class="flex justify-between mb-2"><span class="text-slate-300">Budget: <span id="budget-display" class="font-bold text-emerald-400">$0</span></span> <span class="text-sm text-slate-400">Per employee: <span id="per-employee" class="font-bold">$0</span></span>
           </div><input type="range" id="training-slider" min="0" max="500000" step="25000" value="0" class="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer" oninput="updateTrainingBudget()">
-         </div><!-- Quick Buttons -->
+         </div>
          <div class="grid grid-cols-5 gap-2"><button onclick="setTrainingBudget(0)" class="px-3 py-2 bg-slate-700 hover:bg-slate-600 rounded-lg text-sm font-medium transition">$0</button> <button onclick="setTrainingBudget(125000)" class="px-3 py-2 bg-slate-700 hover:bg-slate-600 rounded-lg text-sm font-medium transition">$125K</button> <button onclick="setTrainingBudget(250000)" class="px-3 py-2 bg-slate-700 hover:bg-slate-600 rounded-lg text-sm font-medium transition">$250K</button> <button onclick="setTrainingBudget(375000)" class="px-3 py-2 bg-slate-700 hover:bg-slate-600 rounded-lg text-sm font-medium transition">$375K</button> <button onclick="setTrainingBudget(500000)" class="px-3 py-2 bg-slate-700 hover:bg-slate-600 rounded-lg text-sm font-medium transition">$500K</button>
          </div>
         </div>
-       </div><!-- Confirm Button -->
+       </div>
        <div class="text-center mb-8"><button onclick="confirmYear()" class="px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 rounded-xl font-bold text-white shadow-lg shadow-emerald-500/25 transition-all text-lg">Complete Year &amp; See Results →</button>
        </div>
       </div><!-- Results Phase -->
       <div id="results-phase" class="hidden pb-8">
-       <!-- Year Summary -->
        <div class="mb-8">
         <h2 class="text-3xl font-bold text-emerald-400 mb-6">📊 Year <span id="result-year">1</span> Results</h2>
         <div id="feedback-section" class="mb-6"></div>
-        <div id="events-container" class="mb-6"></div>
-       </div><!-- Charts -->
+       </div>
        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
         <div class="bg-slate-800/60 rounded-2xl p-6 border border-slate-700">
          <h4 class="text-amber-400 font-bold mb-4">Operating Costs ($M)</h4>
@@ -213,7 +202,7 @@
           <canvas id="chart-electricity"></canvas>
          </div>
         </div>
-       </div><!-- Other Metrics Charts -->
+       </div>
        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
         <div class="bg-slate-800/60 rounded-2xl p-6 border border-slate-700">
          <h4 class="text-purple-400 font-bold mb-4">Patient Satisfaction</h4>
@@ -233,10 +222,20 @@
           <canvas id="chart-rating"></canvas>
          </div>
         </div>
-       </div><!-- Action Buttons -->
+       </div>
        <div class="text-center" id="action-buttons"><button onclick="nextYear()" class="px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 rounded-xl font-bold text-white shadow-lg shadow-emerald-500/25 transition-all text-lg">Continue to Year <span id="next-year-num">2</span> →</button>
        </div>
       </div>
+     </div>
+    </div>
+   </div><!-- Event Modal -->
+   <div id="event-modal-overlay" class="hidden fixed inset-0 bg-black/80 backdrop-blur flex items-center justify-center p-6 z-50">
+    <div class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 max-w-2xl w-full border-2 border-rose-500/50 shadow-2xl max-h-screen overflow-y-auto">
+     <div class="text-center">
+      <div id="event-emoji" class="text-7xl mb-6"></div>
+      <h2 id="event-title" class="text-3xl font-bold text-rose-400 mb-4"></h2>
+      <p id="event-description" class="text-slate-300 text-lg mb-6 leading-relaxed"></p>
+      <div id="event-impacts" class="bg-slate-700/40 rounded-lg p-4 mb-6 space-y-3 text-left text-sm"></div><button onclick="closeEventModal()" class="w-full px-6 py-3 bg-gradient-to-r from-rose-500 to-red-500 hover:from-rose-400 hover:to-red-400 rounded-lg font-semibold text-white transition-all text-lg">Continue</button>
      </div>
     </div>
    </div><!-- End Screen Overlay -->
@@ -261,7 +260,9 @@
       triggeredEvents: [],
       allSelectedOverGame: [],
       eventImpacts: {},
-      telemedicineSelected: false
+      telemedicineSelected: false,
+      pendingEventIndex: 0,
+      storedFeedbacks: []
     };
 
     let charts = {};
@@ -361,8 +362,8 @@
       document.getElementById('year-label').textContent = `Year ${year}`;
       document.getElementById('progress').textContent = `${year}`;
       const carbonReduction = ((STARTING_METRICS.carbon - gameState.metrics.carbon) / STARTING_METRICS.carbon) * 100;
-      document.getElementById('carbon-percent').textContent = Math.max(0, carbonReduction).toFixed(1);
-      document.getElementById('carbon-progress-bar').style.width = Math.min(100, Math.max(0, carbonReduction)) + '%';
+      document.getElementById('carbon-percent').textContent = Math.max(0, Math.min(50, carbonReduction)).toFixed(1);
+      document.getElementById('carbon-progress-bar').style.width = Math.min(100, Math.max(0, carbonReduction * 2)) + '%';
       populateInitiatives(year);
       updateMetricsDisplay();
       updateTrainingBudget();
@@ -478,7 +479,14 @@
           events_triggered: gameState.triggeredEvents.join(',')
         });
       }
-      showResults(feedbacks);
+      
+      if (gameState.triggeredEvents.length > 0) {
+        gameState.pendingEventIndex = 0;
+        gameState.storedFeedbacks = feedbacks;
+        showNextEvent();
+      } else {
+        showResults(feedbacks);
+      }
     }
 
     function checkEvents(year) {
@@ -514,6 +522,56 @@
       gameState.metrics.patient = Math.max(0, Math.min(100, gameState.metrics.patient));
       gameState.metrics.employee = Math.max(0, Math.min(100, gameState.metrics.employee));
       gameState.metrics.rating = Math.max(0, gameState.metrics.rating);
+    }
+
+    function showNextEvent() {
+      if (gameState.pendingEventIndex < gameState.triggeredEvents.length) {
+        const eventId = gameState.triggeredEvents[gameState.pendingEventIndex];
+        
+        if (eventId === 'carbon-tax') {
+          document.getElementById('event-emoji').textContent = '⚡';
+          document.getElementById('event-title').textContent = 'Carbon Tax Imposed!';
+          const costImpact = gameState.eventImpacts.tax || 465000;
+          document.getElementById('event-description').textContent = `Singapore has introduced a carbon tax on fossil fuels. Your hospital's high energy consumption means the tax on grid electricity has significantly increased operational costs by $${(costImpact / 1000).toFixed(0)}K.`;
+          const impactsDiv = document.getElementById('event-impacts');
+          impactsDiv.innerHTML = `
+            <div class="text-slate-300 text-sm"><strong>Impact:</strong> Operating costs increased</div>
+            <div class="text-slate-300 text-sm"><strong>Prevention:</strong> Invest in renewable energy systems to reduce grid dependency</div>
+          `;
+        } else if (eventId === 'flood') {
+          document.getElementById('event-emoji').textContent = '🌊';
+          document.getElementById('event-title').textContent = 'Severe Flood!';
+          const costImpact = gameState.eventImpacts.flood || 2000000;
+          document.getElementById('event-description').textContent = `A catastrophic flood has hit your area. Without climate preparedness planning, your backup systems failed, forcing emergency diversions and causing significant equipment damage worth $${(costImpact / 1000000).toFixed(1)}M.`;
+          const impactsDiv = document.getElementById('event-impacts');
+          impactsDiv.innerHTML = `
+            <div class="text-slate-300 text-sm"><strong>Impact:</strong> Major cost increase, patient satisfaction down, staff morale affected</div>
+            <div class="text-slate-300 text-sm"><strong>Prevention:</strong> Invest in climate disaster planning</div>
+          `;
+        } else if (eventId === 'haze') {
+          document.getElementById('event-emoji').textContent = '🌫️';
+          document.getElementById('event-title').textContent = 'Severe Haze Crisis!';
+          document.getElementById('event-description').textContent = `Regional haze events are causing serious air quality concerns. Patients and staff are complaining about breathing difficulties and visibility issues affecting hospital operations.`;
+          const impactsDiv = document.getElementById('event-impacts');
+          impactsDiv.innerHTML = `
+            <div class="text-slate-300 text-sm"><strong>Impact:</strong> Patient satisfaction and staff engagement declined, hospital rating affected</div>
+            <div class="text-slate-300 text-sm"><strong>Prevention:</strong> Invest in air filtration systems</div>
+          `;
+        }
+        
+        document.getElementById('event-modal-overlay').classList.remove('hidden');
+      }
+    }
+    
+    function closeEventModal() {
+      document.getElementById('event-modal-overlay').classList.add('hidden');
+      gameState.pendingEventIndex++;
+      
+      if (gameState.pendingEventIndex < gameState.triggeredEvents.length) {
+        setTimeout(showNextEvent, 300);
+      } else {
+        showResults(gameState.storedFeedbacks);
+      }
     }
 
     function showResults(feedbacks) {
@@ -557,36 +615,13 @@
       });
       feedbackSection.appendChild(initiativesContainer);
 
-      const eventsContainer = document.getElementById('events-container');
-      eventsContainer.innerHTML = '';
-      if (gameState.triggeredEvents.length > 0) {
-        gameState.triggeredEvents.forEach(event => {
-          const div = document.createElement('div');
-          let eventContent = '';
-          
-          if (event === 'carbon-tax') {
-            const costImpact = gameState.eventImpacts.tax ? `$${(gameState.eventImpacts.tax / 1000).toFixed(0)}K` : '$465K';
-            eventContent = `⚡ <strong>Carbon Tax Imposed!</strong> Singapore's new carbon tax is putting significant pressure on your hospital's profitability. Energy consumption remains above 35M kWh, and the carbon tax on fossil fuel energy has driven energy prices sharply upward, increasing annual operating costs by ${costImpact}.`;
-          } else if (event === 'flood') {
-            const costImpact = gameState.eventImpacts.flood ? `$${(gameState.eventImpacts.flood / 1000000).toFixed(1)}M` : '$2M';
-            eventContent = `🌊 <strong>Severe Flood!</strong> A severe flood engulfs your hospital. Without preparation, backup generators fail. Essential services shut down, forcing emergency diversions and equipment damage. Operating costs increased by ${costImpact}. Hospital rating has been severely damaged.`;
-          } else if (event === 'haze') {
-            eventContent = `🌫️ <strong>Haze Crisis!</strong> Patients and staff express concerns over air quality during haze episodes. Complaints rising. Hospital experience negatively affected.`;
-          }
-          
-          div.className = 'bg-rose-900/30 border border-rose-700/50 rounded-lg p-4 mb-4';
-          div.innerHTML = eventContent;
-          eventsContainer.appendChild(div);
-        });
-      }
-      
       updateMetricsDisplay();
       setTimeout(() => createResultCharts(), 100);
       
       if (gameState.currentYear < TOTAL_YEARS) {
         document.getElementById('action-buttons').innerHTML = `<button onclick="nextYear()" class="px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 rounded-xl font-bold text-white shadow-lg shadow-emerald-500/25 transition-all text-lg">Continue to Year ${gameState.currentYear + 1} →</button>`;
       } else {
-        setTimeout(showGameEnd, 500);
+        document.getElementById('action-buttons').innerHTML = `<button onclick="finishGame()" class="px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 rounded-xl font-bold text-white shadow-lg shadow-emerald-500/25 transition-all text-lg">Finish Game & See Final Results →</button>`;
       }
     }
 
@@ -612,8 +647,8 @@
       document.getElementById('metric-employee').textContent = `${gameState.metrics.employee}`;
       document.getElementById('metric-rating').textContent = `${gameState.metrics.rating.toFixed(1)}/5`;
       const carbonReduction = ((STARTING_METRICS.carbon - gameState.metrics.carbon) / STARTING_METRICS.carbon) * 100;
-      document.getElementById('carbon-percent').textContent = Math.max(0, carbonReduction).toFixed(1);
-      document.getElementById('carbon-progress-bar').style.width = Math.min(100, Math.max(0, carbonReduction)) + '%';
+      document.getElementById('carbon-percent').textContent = Math.max(0, Math.min(50, carbonReduction)).toFixed(1);
+      document.getElementById('carbon-progress-bar').style.width = Math.min(100, Math.max(0, carbonReduction * 2)) + '%';
     }
 
     function createResultCharts() {
@@ -630,116 +665,154 @@
       const costs = gameState.historyMetrics.map(m => m.cost / 1000000);
       const carbons = gameState.historyMetrics.map(m => m.carbon);
       const electricity = gameState.historyMetrics.map(m => m.electricity / 1000000);
-      const patient = gameState.historyMetrics.map(m => m.patient);
-      const employee = gameState.historyMetrics.map(m => m.employee);
-      const rating = gameState.historyMetrics.map(m => m.rating);
+      const patients = gameState.historyMetrics.map(m => m.patient);
+      const employees = gameState.historyMetrics.map(m => m.employee);
+      const ratings = gameState.historyMetrics.map(m => m.rating);
 
       if (charts.cost) charts.cost.destroy();
-      charts.cost = new Chart(document.getElementById('chart-cost'), {
-        type: 'line',
-        data: { labels: years, datasets: [{ label: 'Cost', data: costs, borderColor: '#f59e0b', backgroundColor: 'rgba(245,158,11,0.1)', fill: true, tension: 0.4, pointRadius: 4, pointBackgroundColor: '#f59e0b' }] },
-        options: chartOptions
-      });
-
       if (charts.carbon) charts.carbon.destroy();
-      charts.carbon = new Chart(document.getElementById('chart-carbon'), {
-        type: 'line',
-        data: { labels: years, datasets: [{ label: 'Carbon', data: carbons, borderColor: '#f43f5e', backgroundColor: 'rgba(244,63,94,0.1)', fill: true, tension: 0.4, pointRadius: 4, pointBackgroundColor: '#f43f5e' }] },
-        options: chartOptions
-      });
-
       if (charts.electricity) charts.electricity.destroy();
-      charts.electricity = new Chart(document.getElementById('chart-electricity'), {
-        type: 'line',
-        data: { labels: years, datasets: [{ label: 'Electricity', data: electricity, borderColor: '#0ea5e9', backgroundColor: 'rgba(14,165,233,0.1)', fill: true, tension: 0.4, pointRadius: 4, pointBackgroundColor: '#0ea5e9' }] },
-        options: chartOptions
-      });
-
       if (charts.patient) charts.patient.destroy();
-      charts.patient = new Chart(document.getElementById('chart-patient'), {
-        type: 'line',
-        data: { labels: years, datasets: [{ label: 'Patient', data: patient, borderColor: '#a855f7', backgroundColor: 'rgba(168,85,247,0.1)', fill: true, tension: 0.4, pointRadius: 4, pointBackgroundColor: '#a855f7' }] },
-        options: chartOptions
-      });
-
       if (charts.employee) charts.employee.destroy();
-      charts.employee = new Chart(document.getElementById('chart-employee'), {
-        type: 'line',
-        data: { labels: years, datasets: [{ label: 'Employee', data: employee, borderColor: '#3b82f6', backgroundColor: 'rgba(59,130,246,0.1)', fill: true, tension: 0.4, pointRadius: 4, pointBackgroundColor: '#3b82f6' }] },
-        options: chartOptions
-      });
-
       if (charts.rating) charts.rating.destroy();
-      charts.rating = new Chart(document.getElementById('chart-rating'), {
-        type: 'line',
-        data: { labels: years, datasets: [{ label: 'Rating', data: rating, borderColor: '#eab308', backgroundColor: 'rgba(234,179,8,0.1)', fill: true, tension: 0.4, pointRadius: 4, pointBackgroundColor: '#eab308' }] },
-        options: chartOptions
-      });
-    }
 
-    function showGameEnd() {
-      const overlayDiv = document.getElementById('end-screen-overlay');
-      const contentDiv = document.getElementById('end-screen-content');
-      
-      let endMessage = '';
-      const carbonReduction = ((STARTING_METRICS.carbon - gameState.metrics.carbon) / STARTING_METRICS.carbon) * 100;
-      const targetMet = gameState.metrics.carbon <= TARGET_CARBON;
-      const costPerformance = gameState.metrics.cost < STARTING_METRICS.cost ? 'improved' : 'increased';
-      const ratingPerformance = gameState.metrics.rating;
-
-      if (targetMet) {
-        endMessage = `🎉 <strong>Net Zero Success!</strong> Your hospital achieved ${carbonReduction.toFixed(1)}% carbon reduction, surpassing the 50% target. Final hospital rating: ${gameState.metrics.rating.toFixed(1)}/5. Operating costs ${costPerformance}. Your leadership in healthcare sustainability is now recognized globally.`;
-      } else if (carbonReduction >= 40) {
-        endMessage = `✅ <strong>Major Progress!</strong> Your hospital achieved ${carbonReduction.toFixed(1)}% carbon reduction, narrowly missing the 50% target. Final hospital rating: ${gameState.metrics.rating.toFixed(1)}/5. Consider accelerating high-impact initiatives next cycle.`;
-      } else if (carbonReduction >= 25) {
-        endMessage = `⚠️ <strong>Moderate Progress.</strong> Your hospital achieved ${carbonReduction.toFixed(1)}% carbon reduction. Final hospital rating: ${gameState.metrics.rating.toFixed(1)}/5. Significant work remains to reach Net Zero by 2045.`;
-      } else {
-        endMessage = `❌ <strong>Insufficient Progress.</strong> Your hospital achieved only ${carbonReduction.toFixed(1)}% carbon reduction. Final hospital rating: ${gameState.metrics.rating.toFixed(1)}/5. Urgent action needed to meet sustainability targets.`;
+      const costCtx = document.getElementById('chart-cost');
+      if (costCtx) {
+        charts.cost = new Chart(costCtx, {
+          type: 'line',
+          data: { labels: years, datasets: [{ label: 'Operating Cost', data: costs, borderColor: '#f59e0b', backgroundColor: 'rgba(245, 158, 11, 0.1)', fill: true, tension: 0.4, pointRadius: 5, pointBackgroundColor: '#f59e0b' }] },
+          options: chartOptions
+        });
       }
 
-      contentDiv.innerHTML = `
-        <div class="max-w-2xl mx-auto bg-slate-800 rounded-3xl p-8 border border-emerald-700/50 text-center">
-          <div class="text-6xl mb-6">🌍</div>
-          <h2 class="text-4xl font-bold text-emerald-400 mb-6">Challenge Complete!</h2>
-          <div class="bg-slate-900 rounded-2xl p-6 mb-8 border border-slate-700">
-            <p class="text-slate-200 text-lg mb-6">${endMessage}</p>
-            <div class="grid grid-cols-2 gap-4 text-left">
-              <div class="bg-slate-800/60 rounded-lg p-4">
-                <p class="text-slate-400 text-sm">Carbon Reduction</p>
-                <p class="text-2xl font-bold text-rose-400">${carbonReduction.toFixed(1)}%</p>
+      const carbonCtx = document.getElementById('chart-carbon');
+      if (carbonCtx) {
+        charts.carbon = new Chart(carbonCtx, {
+          type: 'line',
+          data: { labels: years, datasets: [{ label: 'Carbon', data: carbons, borderColor: '#ef4444', backgroundColor: 'rgba(239, 68, 68, 0.1)', fill: true, tension: 0.4, pointRadius: 5, pointBackgroundColor: '#ef4444' }] },
+          options: chartOptions
+        });
+      }
+
+      const electricityCtx = document.getElementById('chart-electricity');
+      if (electricityCtx) {
+        charts.electricity = new Chart(electricityCtx, {
+          type: 'line',
+          data: { labels: years, datasets: [{ label: 'Electricity', data: electricity, borderColor: '#0ea5e9', backgroundColor: 'rgba(14, 165, 233, 0.1)', fill: true, tension: 0.4, pointRadius: 5, pointBackgroundColor: '#0ea5e9' }] },
+          options: chartOptions
+        });
+      }
+
+      const patientCtx = document.getElementById('chart-patient');
+      if (patientCtx) {
+        charts.patient = new Chart(patientCtx, {
+          type: 'line',
+          data: { labels: years, datasets: [{ label: 'Patient Satisfaction', data: patients, borderColor: '#a855f7', backgroundColor: 'rgba(168, 85, 247, 0.1)', fill: true, tension: 0.4, pointRadius: 5, pointBackgroundColor: '#a855f7' }] },
+          options: chartOptions
+        });
+      }
+
+      const employeeCtx = document.getElementById('chart-employee');
+      if (employeeCtx) {
+        charts.employee = new Chart(employeeCtx, {
+          type: 'line',
+          data: { labels: years, datasets: [{ label: 'Employee Engagement', data: employees, borderColor: '#3b82f6', backgroundColor: 'rgba(59, 130, 246, 0.1)', fill: true, tension: 0.4, pointRadius: 5, pointBackgroundColor: '#3b82f6' }] },
+          options: chartOptions
+        });
+      }
+
+      const ratingCtx = document.getElementById('chart-rating');
+      if (ratingCtx) {
+        charts.rating = new Chart(ratingCtx, {
+          type: 'line',
+          data: { labels: years, datasets: [{ label: 'Hospital Rating', data: ratings, borderColor: '#eab308', backgroundColor: 'rgba(234, 179, 8, 0.1)', fill: true, tension: 0.4, pointRadius: 5, pointBackgroundColor: '#eab308' }] },
+          options: chartOptions
+        });
+      }
+    }
+
+    function finishGame() {
+      const carbonReduction = ((STARTING_METRICS.carbon - gameState.metrics.carbon) / STARTING_METRICS.carbon) * 100;
+      const hitTarget = gameState.metrics.carbon <= TARGET_CARBON;
+
+      let endContent = `
+        <div class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-12 max-w-2xl mx-auto border-2 ${hitTarget ? 'border-emerald-500/50' : 'border-amber-500/50'} shadow-2xl">
+          <div class="text-center">
+            <div class="text-8xl mb-6">${hitTarget ? '🎉' : '⭐'}</div>
+            <h2 class="text-4xl font-bold mb-4 ${hitTarget ? 'bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent' : 'bg-gradient-to-r from-amber-400 to-orange-300 bg-clip-text text-transparent'}">
+              ${hitTarget ? 'Mission Accomplished!' : 'Great Effort!'}
+            </h2>
+            <p class="text-xl text-slate-300 mb-6">
+              ${hitTarget ? `You've achieved the 50% carbon reduction target! Your hospital has successfully reduced emissions from 30,000 to ${gameState.metrics.carbon.toLocaleString()} tonnes CO₂e.` : `You reduced emissions by ${carbonReduction.toFixed(1)}%! While you didn't quite reach the 50% target, your hospital made significant progress toward sustainability.`}
+            </p>
+            <div class="grid grid-cols-2 gap-4 mb-8">
+              <div class="bg-slate-700/60 rounded-xl p-4">
+                <p class="text-xs text-slate-400 mb-1">Final Carbon</p>
+                <p class="text-2xl font-bold text-rose-400">${gameState.metrics.carbon.toLocaleString()}t</p>
               </div>
-              <div class="bg-slate-800/60 rounded-lg p-4">
-                <p class="text-slate-400 text-sm">Final Rating</p>
-                <p class="text-2xl font-bold text-yellow-400">${gameState.metrics.rating.toFixed(1)}/5</p>
+              <div class="bg-slate-700/60 rounded-xl p-4">
+                <p class="text-xs text-slate-400 mb-1">Total Reduction</p>
+                <p class="text-2xl font-bold text-emerald-400">${carbonReduction.toFixed(1)}%</p>
               </div>
-              <div class="bg-slate-800/60 rounded-lg p-4">
-                <p class="text-slate-400 text-sm">Final Cost</p>
+              <div class="bg-slate-700/60 rounded-xl p-4">
+                <p class="text-xs text-slate-400 mb-1">Operating Cost</p>
                 <p class="text-2xl font-bold text-amber-400">$${(gameState.metrics.cost / 1000000).toFixed(1)}M</p>
               </div>
-              <div class="bg-slate-800/60 rounded-lg p-4">
-                <p class="text-slate-400 text-sm">Final Emissions</p>
-                <p class="text-2xl font-bold text-emerald-400">${gameState.metrics.carbon.toLocaleString()}t</p>
+              <div class="bg-slate-700/60 rounded-xl p-4">
+                <p class="text-xs text-slate-400 mb-1">Hospital Rating</p>
+                <p class="text-2xl font-bold text-yellow-400">${gameState.metrics.rating.toFixed(1)}/5</p>
               </div>
             </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <button onclick="resetToWelcome()" class="px-8 py-3 bg-gradient-to-r from-slate-700 to-slate-600 hover:from-slate-600 hover:to-slate-500 rounded-lg font-semibold text-white transition-all">Play Again</button>
+              <button onclick="shareResults()" class="px-8 py-3 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 rounded-lg font-semibold text-white transition-all">Share Results</button>
+            </div>
           </div>
-          <button onclick="location.reload()" class="px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 rounded-xl font-bold text-white shadow-lg shadow-emerald-500/25 transition-all text-lg">Play Again</button>
         </div>
       `;
-      overlayDiv.classList.remove('hidden');
+      
+      document.getElementById('end-screen-content').innerHTML = endContent;
+      document.getElementById('end-screen-overlay').classList.remove('hidden');
+    }
+
+    function resetToWelcome() {
+      document.getElementById('end-screen-overlay').classList.add('hidden');
+      document.getElementById('game-screen').classList.add('hidden');
+      document.getElementById('welcome-screen').classList.remove('hidden');
+      gameState = {
+        currentYear: 0,
+        metrics: { ...STARTING_METRICS },
+        historyMetrics: [{ ...STARTING_METRICS }],
+        selectedInitiatives: [],
+        trainingBudget: 0,
+        allInitiatives: {},
+        carryoverInitiatives: [],
+        triggeredEvents: [],
+        allSelectedOverGame: [],
+        eventImpacts: {},
+        telemedicineSelected: false,
+        pendingEventIndex: 0,
+        storedFeedbacks: []
+      };
+      Object.values(charts).forEach(c => c && c.destroy());
+      charts = {};
+    }
+
+    function shareResults() {
+      const carbonReduction = ((STARTING_METRICS.carbon - gameState.metrics.carbon) / STARTING_METRICS.carbon) * 100;
+      const text = `I completed the Healthcare Emissions Action Lab! 🌍 I reduced carbon emissions by ${carbonReduction.toFixed(1)}% and achieved a hospital rating of ${gameState.metrics.rating.toFixed(1)}/5. Try it yourself!`;
+      if (navigator.share) {
+        navigator.share({ title: 'Healthcare Emissions Action Lab', text: text });
+      } else {
+        alert('Results: ' + text);
+      }
     }
 
     function showNotification(msg) {
-      const countElement = document.getElementById('selection-count');
-      const original = countElement.textContent;
-      countElement.textContent = msg;
-      countElement.classList.add('text-amber-400');
-      setTimeout(() => {
-        countElement.textContent = original;
-        countElement.classList.remove('text-amber-400');
-      }, 2000);
+      alert(msg);
     }
 
     initGame();
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d2464fb97b0c90f',t:'MTc3MTgyNTI4OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d2dd94903907e17',t:'MTc3MTkyNDQyNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
